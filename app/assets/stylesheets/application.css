@@ -710,8 +710,8 @@ pre.about-me, .about-me pre {
 }
 
 #breathing {
-    height: 100%,
-    width: 100%,
+    height: 100%;
+    width: 100%;
     -webkit-animation: breathing 20s ease-out infinite normal;
     animation: breathing 20s ease-out infinite normal;
     -webkit-font-smoothing: antialiased;
