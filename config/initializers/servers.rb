@@ -20,7 +20,7 @@ Rails.configuration.tap do |config|
 
         # Minimum bungees online at any given time
         datacenters: {
-            'US' => { minimum_bungees: 1 },
+            'US' => { minimum_bungees: 0 },
             'EU' => { minimum_bungees: 0 },
             'AU' => { minimum_bungees: 0 },
             'AS' => { minimum_bungees: 0 }

@@ -12,19 +12,18 @@ module BUNNY
                 password: PASSWORD
             }
         },
+        staging: -> {
+            {
+                hosts: [HOST, HOST2, HOST3].compact,
+                user: USER,
+                password: PASSWORD
+            }
+        },
         development: -> {
             {
                 host: HOST,
                 user: USER,
                 password: PASSWORD
-            }
-        },
-        test: -> {
-            {
-                host: HOST,
-                user: USER,
-                password: PASSWORD,
-                port: 6783
             }
         }
     }

@@ -11,10 +11,10 @@ PGM::Application.configure do
     config.action_controller.perform_caching = true
 
     # Disable Rails's static asset server (Apache or nginx will already do this)
-    config.serve_static_files = STAGING
+    # config.serve_static_files = STAGING
 
     # Enable serving of images, stylesheets, and JavaScripts from an asset server
-    config.action_controller.asset_host = "https://static.#{ORG::DOMAIN}" unless STAGING
+    # config.action_controller.asset_host = "https://static.#{ORG::DOMAIN}" unless STAGING
 
     # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
     config.assets.precompile += %w( *.js )
@@ -60,4 +60,11 @@ PGM::Application.configure do
 
     # Send deprecation notices to registered listeners
     config.active_support.deprecation = :notify
+
+    # Custom mailing settings
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = { address: ENV['SMTP_HOST'] || 'localhost', port: 25 }
+    config.action_mailer.default_url_options = { :host => ENV['DEVISE_HOST'] || ORG::DOMAIN }
+
 end
