@@ -12,7 +12,6 @@ PGM::Application.configure do
 
     # Disable Rails's static asset server (Apache or nginx will already do this)
     config.serve_static_files = true
-    config.serve_static_assets = true
 
     # Enable serving of images, stylesheets, and JavaScripts from an asset server
     # config.action_controller.asset_host = "https://static.#{ORG::DOMAIN}" unless STAGING
@@ -25,7 +24,7 @@ PGM::Application.configure do
     config.assets.compress = true
 
     # Fallback to assets pipeline if a precompiled asset is missed
-    config.assets.compile = false
+    config.assets.compile = true
 
     # Generate digests for assets URLs
     config.assets.digest = true
