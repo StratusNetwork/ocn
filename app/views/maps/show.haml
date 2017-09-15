@@ -26,21 +26,22 @@
                     = button_to download_map_path(@map), class: 'btn btn-primary pull-right-md' do
                         %i.fa.fa-download
                         Download
-            %h1{style: "margin-top: 0;"}
+            %h2.strong{style: "margin-top: 0;"}
                 = @map.name
                 %small= @map.version.join('.')
             %b= render partial: 'authors', locals: {map: @map, limit: 999}
             %dl.dl-horizontal
-                - unless @map.teams.empty?
-                    %dt TEAMS
+                %br
+                    - unless @map.teams.empty?
+                        %dt TEAMS
+                        %dd
+                            - @map.teams.each do |team|
+                                %strong{style: "color: #{team.chat_color.to_html}"}= team.name
+                                = "(#{team.max_players} players)"
+                                %br
+                    %dt OBJECTIVE
                     %dd
-                        - @map.teams.each do |team|
-                            %strong{style: "color: #{team.chat_color.to_html}"}= team.name
-                            = "(#{team.max_players} players)"
-                            %br
-                %dt OBJECTIVE
-                %dd
-                    %strong= @map.objective
+                        %strong= @map.objective
         .col-md-4
             %img.thumbnail.center-block.img-responsive{src: @map.thumbnail_url}
     - if @show_map_ratings
@@ -60,5 +61,5 @@
     .row
         .col-md-12
             %hr
-            %h2 Matches on #{@map.name}
+            %h4.strong Matches on #{@map.name}
             = render partial: 'matches/list', locals: {matches: @matches, exclude: [:map]}

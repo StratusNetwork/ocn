@@ -2,11 +2,11 @@
     .col-md-4.rating
         - if ratings.confident?
             = render partial: 'stars', locals: {size: 46, score: ratings.mean}
-            %h1
+            %h1.strong
                 = sprintf('%.2f', ratings.mean)
                 %small Average Rating
         - else
-            %h4 Not enough player ratings
+            %h4.strong Not enough player ratings
     .col-md-8
         .table-container
             %table.table.table-bordered
@@ -29,4 +29,4 @@
                                         = ratings.dist[score]
 - else
     .col-md-12
-        %h4 Not enough player ratings
+        %h4.strong Not enough player ratings

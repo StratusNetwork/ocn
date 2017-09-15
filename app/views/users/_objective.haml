@@ -4,7 +4,7 @@
     .col-md-12
         %h2.strong
             = total
-            %small= klass.total_description
+            %small.strong= klass.total_description
 .row
     - objectives.each_slice(per_column) do |slice|
         .col-md-4.col-sm-6

@@ -9,7 +9,7 @@
         %a{:href => url_for(controller: "maps", action: "show", id: map.slug)}
             %img.img-responsive{:src => map.thumbnail_url, :alt => map.name}
     .caption.strong{:style => "text-align: center;"}
-        %h1.lead= link_to map.name, url_for(controller: "maps", action: "show", id: map.slug)
+        %h1.strong= link_to map.name, url_for(controller: "maps", action: "show", id: map.slug)
         %small
             = render partial: "maps/authors", locals: {map: map, limit: 3}
         - if @show_map_ratings
