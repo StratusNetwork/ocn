@@ -10,7 +10,7 @@
     - if @cake_day
         .row
             .col-md-12
-                .alert.alert-warning
+                .alert.alert-info
                     %i.fa.fa-gift
                     %strong Happy Cake Day!
                     - same_user = is_same_user?(@player)
@@ -100,10 +100,10 @@
                     - if  (defined? PlayerStat.for_period('eternity').for_user(@player).rank('kills')).nil?
                         .unqualified
                             %a{href: url_for(controller: 'users', action: 'stats')}
-                            Player's rank unavailable 
+                            Player's rank unavailable
                     - else
                         .rank>
-                            .number 
+                            .number
                                 = PlayerStat.for_period('eternity').for_user(@player).rank('kills')
                                 %sup>= PlayerStat.for_period('eternity').for_user(@player).rank('kills').ordinalize[-2..-1]
                         .unqualified
@@ -252,8 +252,9 @@
                                 - if @trophy_count > 0
                                     = render :partial => "trophies", :locals => {:trophies => @player.trophies.reverse}
                                 - else
-                                    %pre.strong
-                                        Nothing here yet.
+                                    .col-md-12
+                                        %center
+                                            %p.strong No trophies to display.
                     .tab-pane#pvp-encounters
                         .row
                             - if !@encounters.empty?
@@ -294,7 +295,7 @@
                             - else
                                 .col-md-12
                                     %center
-                                        %p.strong No deaths to display.
+                                        %p.strong No encounters to display.
                     .tab-pane#objectives
                         - if @objectives && !@objectives.empty?
                             - @objectives.each do |klass, total, objectives|
@@ -303,7 +304,7 @@
                             .row
                                 .col-md-12
                                     %center
-                                        %p.strong No objectives completed
+                                        %p.strong No objectives completed.
                     - unless @engagements.empty?
                         .tab-pane#matches
                             .row

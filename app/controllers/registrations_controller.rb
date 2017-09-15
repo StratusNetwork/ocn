@@ -42,7 +42,7 @@ class RegistrationsController < Devise::RegistrationsController
 
         # FIXME: Check permissions before changing default server and death screen
         # return redirect_to_back edit_user_registration_path, :alert => 'You must be a premium user to change your default server' unless @user.can_set_default_server?
-        return redirect_to_back edit_user_registration_path, :alert => 'Invalid gender specified' unless ['Male', 'Female', '', nil].include? form[:gender]
+        return redirect_to_back edit_user_registration_path, :alert => 'Invalid gender specified' unless ['Male', 'Female', 'Other', '', nil].include? form[:gender]
 
         email_available = User.email_available?(form[:email])
         email_changed = (@user.email != form[:email].to_s.strip && !form[:email].to_s.strip.blank?)
@@ -79,7 +79,7 @@ class RegistrationsController < Devise::RegistrationsController
             redirect_to_back edit_user_registration_path, :notice => "Information Updated", :alert => alert
         else
             msg = "Your current password was incorrect." if password_changed || email_changed
- 
+
             if password_entered
                 msg = "Your new password was not long enough." if password_changed && !password_available
                 msg = "Your new passwords do not match." if form[:password] != form[:password_confirmation]

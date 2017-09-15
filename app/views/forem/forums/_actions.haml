@@ -1,5 +1,5 @@
 - if current_user
-    %a.btn.btn-sm.btn-warning{href: mark_read_forum_path(@forum),
+    %a.btn.btn-sm.btn-info{href: mark_read_forum_path(@forum),
                                  data: {method: 'post',
                                         confirm: 'Clear unread count for all topics in this forum?'}} Mark All Read
 - if Forem::Topic.can_create?(@forum, current_user)

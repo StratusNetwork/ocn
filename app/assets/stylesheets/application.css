@@ -156,7 +156,7 @@ hr {
     right: 2px;
     padding: 2px 4px;
     font-size: 75%;
-    background-color: #f0ad4e;
+    background-color: #337ab7;
 }
 
 .navbar-collapse .badge {
@@ -164,7 +164,7 @@ hr {
     font-size: 75%;
     top: -1px;
     position: relative;
-    background-color: #f0ad4e;
+    background-color: #337ab7;
 }
 
 .page-header {
