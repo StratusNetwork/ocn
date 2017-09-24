@@ -28,6 +28,10 @@
                             %a{:href => main_app.url_for(controller: '/users', action: 'stats')}
                                 %i.fa.fa-line-chart
                                 Stats
+                        %li
+                            %a{:href => main_app.staff_index_path}
+                                %i.fa.fa-user-md
+                                Staff Listings
                         -# %li
                             %a{:href => main_app.channels_path}
                                 %i.fa.fa-youtube-play

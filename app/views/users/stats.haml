@@ -15,7 +15,7 @@
                             %button.btn.btn-sm.btn-primary#search-button Find Player
                 - if user_signed_in?
                     .form-group
-                        = link_to 'Find Me', url_for(params.merge(:user => current_user_safe.username)), class: "btn btn-sm btn-warning"
+                        = link_to 'Find Me', url_for(params.merge(:user => current_user_safe.username)), class: "btn btn-sm btn-info"
             .form-inline
                 .form-group
                     %label Playing
