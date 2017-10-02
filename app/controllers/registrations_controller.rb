@@ -43,7 +43,7 @@ class RegistrationsController < Devise::RegistrationsController
         # FIXME: Check permissions before changing default server and death screen
         # return redirect_to_back edit_user_registration_path, :alert => 'You must be a premium user to change your default server' unless @user.can_set_default_server?
         return redirect_to_back edit_user_registration_path, :alert => 'Invalid gender specified' unless ['Male', 'Female', 'Other', '', nil].include? form[:gender]
-        return redirect_to_back edit_user_registration_path, :alert => 'Invalid theme specified' unless ['Default', 'Dark Theme', ''].include? form[:web_theme]
+        return redirect_to_back edit_user_registration_path, :alert => 'Invalid theme specified' unless ['Default', 'Dark Theme', '', nil].include? form[:web_theme]
 
         email_available = User.email_available?(form[:email])
         email_changed = (@user.email != form[:email].to_s.strip && !form[:email].to_s.strip.blank?)
