@@ -1,5 +1,5 @@
 body {
-    background-color: #212121;
+    background-color: #333333;
 }
 
 div,
@@ -72,6 +72,10 @@ blockquote {
     color: #bdbdbd !important;
     background-color: #121212 !important;
     border-color: transparent !important;
+}
+
+.btn {
+    color: #121212;
 }
 
 .btn-default {
@@ -187,6 +191,17 @@ td {
   color: #121212;
 }
 
+tr.info > td > a,
+tr.info > th > a,
+tr.danger > td > a,
+tr.danger > th > a,
+tr.warning > td > a,
+tr.warning > th > a,
+tr.success > td > a,
+tr.success > th > a {
+    color: #121212;
+}
+
 .table-bordered > th,
 .table-bordered > td {
     border-color: #424242;
@@ -213,7 +228,8 @@ td {
 
 .pagination > li > a,
 .pagination > li > span,
-.pagination > li.disabled {
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover {
     background-color: #121212;
     color: #bdbdbd;
 }
