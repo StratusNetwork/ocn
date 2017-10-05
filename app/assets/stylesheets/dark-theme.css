@@ -14,7 +14,12 @@ p {
 }
 
 a {
-    color: #eeeeee;
+    color: #90A4AE;
+}
+
+a:hover,
+a:focus {
+    color: #CFD8DC;
 }
 
 li {
@@ -26,7 +31,7 @@ hr {
 }
 
 pre {
-    background-color: #121212;
+    background-color: #212121;
     color: #bdbdbd;
     border-color: transparent;
 }
@@ -36,7 +41,7 @@ blockquote {
 }
 
 .navbar-default {
-    background-color: #121212;
+    background-color: #212121;
     border-color: transparent;
 }
 
@@ -46,11 +51,11 @@ blockquote {
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
     color: #bdbdbd !important;
-    background-color: #212121 !important;
+    background-color: #333333 !important;
 }
 
 .dropdown-menu {
-    background-color: #212121;
+    background-color: #333333;
 }
 
 .dropdown-menu > li > a {
@@ -59,7 +64,7 @@ blockquote {
 
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
-    background-color: #121212;
+    background-color: #212121;
     color: #bdbdbd;
 }
 
@@ -70,25 +75,30 @@ blockquote {
 .navbar-default .navbar-nav > .open > a:focus,
 .open > .dropdown-toggle.btn-default {
     color: #bdbdbd !important;
-    background-color: #121212 !important;
+    background-color: #212121 !important;
     border-color: transparent !important;
 }
 
 .btn {
-    color: #121212;
+    color: #212121;
 }
 
 .btn-default {
-    background-color: #121212;
+    background-color: #212121;
     color: #bdbdbd;
     border-color: transparent;
 }
 
 .btn-default:hover,
 .btn-default:focus {
-    background-color: #212121;
+    background-color: #333333;
     color: #bdbdbd;
-    border-color: #121212;
+    border-color: #212121;
+}
+
+.btn-primary,
+.btn-danger {
+    color: #eeeeee;
 }
 
 .nav-tabs {
@@ -96,21 +106,21 @@ blockquote {
 }
 
 .nav-tabs > li.active > a {
-    background-color: #121212 !important;
+    background-color: #212121 !important;
     color: #bdbdbd !important;
     border-color: #616161;
 }
 
 .nav-tabs > li > a:hover,
 .nav-tabs > li > a:focus {
-    background-color: #121212;
+    background-color: #212121;
     color: #bdbdbd;
     border-color: transparent;
 }
 
 .nav-pills > li > a:hover,
 .nav-pills > li > a:focus {
-    background-color: #121212;
+    background-color: #212121;
     color: #bdbdbd;
     border-color: transparent;
 }
@@ -122,12 +132,12 @@ blockquote {
 }
 
 .bs-docs-social {
-    background-color: #121212;
+    background-color: #212121;
     border-color: transparent;
 }
 
 .well {
-    background-color: #121212;
+    background-color: #212121;
     border-color: transparent;
 }
 
@@ -188,7 +198,7 @@ td {
 .table > thead > tr.success > th,
 .table > tbody > tr.success > th,
 .table > tfoot > tr.success > th {
-  color: #121212;
+  color: #212121;
 }
 
 tr.info > td > a,
@@ -199,7 +209,7 @@ tr.warning > td > a,
 tr.warning > th > a,
 tr.success > td > a,
 tr.success > th > a {
-    color: #121212;
+    color: #212121;
 }
 
 .table-bordered > th,
@@ -212,25 +222,29 @@ tr.success > th > a {
 }
 
 .listing > .row:nth-of-type(even){
-    background-color:#212121;
+    background-color:#333333;
 }
 
 .form-control {
-    background-color: #121212;
+    background-color: #212121;
     color: #bdbdbd;
     border-color: transparent;
 }
 
 .form-control:disabled {
     background-color: #bdbdbd;
-    color: #121212;
+    color: #212121;
+}
+
+.pagination > li > a {
+    border-color: #bdbdbd !important;
 }
 
 .pagination > li > a,
 .pagination > li > span,
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover {
-    background-color: #121212;
+    background-color: #212121;
     color: #bdbdbd;
 }
 
@@ -238,11 +252,11 @@ tr.success > th > a {
 .pagination > li > a:focus,
 .pagination > li > span:hover,
 .pagination > li > span:focus {
-    background-color: #121212;
+    background-color: #212121;
 }
 
 .modal-content {
-    background-color: #212121;
+    background-color: #333333;
 }
 
 .modal-header,
@@ -251,7 +265,7 @@ tr.success > th > a {
 }
 
 .breadcrumb {
-    background-color: #121212;
+    background-color: #212121;
     border-color: transparent !important;
 }
 
@@ -280,7 +294,7 @@ tr.success > th > a {
 }
 
 .trophy {
-    background-color: #121212;
+    background-color: #212121;
     border-color: transparent;
 }
 
@@ -290,6 +304,6 @@ tr.success > th > a {
 }
 
 .map-container > .thumbnail {
-    background-color: #121212 !important;
+    background-color: #212121 !important;
     border-color: transparent;
 }
