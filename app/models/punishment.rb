@@ -39,7 +39,7 @@ class Punishment
     belongs_to :match
 
     field :family, type: String, default: '_web'.freeze
-    field :date, type: Time, default: Time.now
+    field :date, type: Time, default: Time.now.utc
     field :reason, type: String
     field :evidence, type: String, default: nil
 
