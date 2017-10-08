@@ -202,14 +202,27 @@ td {
 }
 
 tr.info > td > a,
-tr.info > th > a,
+tr.info > th > a {
+    color: #212121;
+    background-color: #0288D1;
+}
+
 tr.danger > td > a,
-tr.danger > th > a,
+tr.danger > th > a {
+    color: #212121;
+    background-color: #D32F2F;
+}
+
 tr.warning > td > a,
-tr.warning > th > a,
+tr.warning > th > a {
+    color: #212121;
+    background-color: #F57C00;
+}
+
 tr.success > td > a,
 tr.success > th > a {
     color: #212121;
+    background-color: #388E3C;
 }
 
 .table-bordered > th,
@@ -269,28 +282,48 @@ tr.success > th > a {
     border-color: transparent !important;
 }
 
+.panel-success,
 .alert-success {
     background-color: #388E3C;
     color: #eeeeee;
     border-color: #1B5E20;
 }
 
+.panel-warning,
 .alert-warning {
     background-color: #F57C00;
     color: #eeeeee;
     border-color: #E65100
 }
 
+.panel-danger,
 .alert-danger {
     background-color: #D32F2F;
     color: #eeeeee;
     border-color: #B71C1C;
 }
 
+.panel-info.
 .alert-info {
     background-color: #0288D1;
     color: #eeeeee;
     border-color: #01579B;
+}
+
+.panel {
+    background-color: transparent;
+}
+
+.label-success,
+.label-yellow,
+.label-danger,
+.label-info {
+    color: #212121;
+}
+
+li > .friend-icon > a.thumbnail {
+    background-color: #212121;
+    border-color: #121212;
 }
 
 .trophy {
