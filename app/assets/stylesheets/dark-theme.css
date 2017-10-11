@@ -204,25 +204,21 @@ td {
 tr.info > td > a,
 tr.info > th > a {
     color: #212121;
-    background-color: #0288D1;
 }
 
 tr.danger > td > a,
 tr.danger > th > a {
     color: #212121;
-    background-color: #D32F2F;
 }
 
 tr.warning > td > a,
 tr.warning > th > a {
     color: #212121;
-    background-color: #F57C00;
 }
 
 tr.success > td > a,
 tr.success > th > a {
     color: #212121;
-    background-color: #388E3C;
 }
 
 .table-bordered > th,
