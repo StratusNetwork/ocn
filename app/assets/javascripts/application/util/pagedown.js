@@ -5,7 +5,7 @@ $(document).ready(function () {
             $("#wmd-help").modal();
             return false;
         },
-        title: "Markdown and Emoji Help"
+        title: "Help"
     };
 
     // setup editor
