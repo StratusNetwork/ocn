@@ -43,17 +43,17 @@
                                         %a.thumbnail{:href => user_path(friend)}
                                             = avatar_for(friend, 48)
                     .tab-pane.fade#denied
-                        - if @denials == nil || @denials.count == 0
-                            %p.strong.center You have no denied requests!
-                        - else
-                            .table-container
-                                %table.table.table-bordered.table-striped
-                                    %thead
-                                        %tr
-                                            %th{:width => "40%"} Friend
-                                            %th{:width => "30%"} Action
-                                            %th{:width => "30%"} Denied At
-                                    %tbody
+                        .table-container
+                            %table.table.table-bordered.table-striped
+                                %thead
+                                    %tr
+                                        %th{:width => "40%"} Friend
+                                        %th{:width => "30%"} Action
+                                        %th{:width => "30%"} Denied At
+                                %tbody
+                                    - if @denials == nil || @denials.count == 0
+                                        %p.strong.center You have no denied requests!
+                                    - else
                                         - @denials.each_with_index do |friend, i|
                                             %tr
                                                 %td
@@ -66,17 +66,17 @@
                                                     = time_ago_in_words(friend.decision_date, false, :vague => true) + " ago"
                                 = paginate @denials unless @denials == nil
                     .tab-pane.fade#pending
-                        - if @requests == nil || @requests.count == 0
-                            %p.strong.center You have no pending requests!
-                        - else
-                            .table-container
-                                %table.table.table-bordered.table-striped
-                                    %thead
-                                        %tr
-                                            %th{:width => "40%"} Who
-                                            %th{:width => "30%"} Action
-                                            %th{:width => "30%"} Sent At
-                                    %tbody
+                        .table-container
+                            %table.table.table-bordered.table-striped
+                                %thead
+                                    %tr
+                                        %th{:width => "40%"} Who
+                                        %th{:width => "30%"} Action
+                                        %th{:width => "30%"} Sent At
+                                %tbody
+                                    - if @requests == nil || @requests.count == 0
+                                        %p.strong.center You have no pending requests!
+                                    - else
                                         - @requests.each_with_index do |request, i|
                                             %tr
                                                 - outgoing = is_same_user?(request.friender)
