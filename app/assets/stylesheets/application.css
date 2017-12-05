@@ -788,3 +788,9 @@ pre {
 .front-title {
     color: #ffffff;
 }
+
+.well-settings {
+    border-top-style: solid;
+    border-top-width: 3px;
+    border-top-color: #337ab7;
+}

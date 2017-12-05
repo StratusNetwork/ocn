@@ -20,5 +20,9 @@ class User
         def beta_participant?
             beta_participant
         end
+
+        def can_set_beta_participant?
+            premium?
+        end
     end
 end

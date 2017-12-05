@@ -45,6 +45,10 @@ class RegistrationsController < Devise::RegistrationsController
             banned_updates << 'death_screen'
         end
 
+        unless @user.can_set_beta_participant?
+            banned_updates << 'beta_participant'
+        end
+
         # FIXME
         # unless User.valid_death_screen?(form[:death_screen])
         #     form[:death_screen] = 'default'

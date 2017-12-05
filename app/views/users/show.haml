@@ -197,31 +197,19 @@
                                         %blockquote
                                             %p
                                                 %a{:href => "mailto:#{@player.public_email}"}= @player.public_email
-                                - if !@player.skype.to_s.empty?
-                                    .col-md-4.col-sm-6
-                                        %h5.strong Skype
-                                        %blockquote
-                                            %p
-                                                %a{:href => "skype:#{@player.skype}?userinfo", :target => "_blank"}= @player.skype
                                 - if !@player.twitter.to_s.empty?
                                     .col-md-4.col-sm-6
                                         %h5.strong Twitter
                                         %blockquote
                                             %p
                                                 %a{:href => "http://twitter.com/#{@player.twitter}", :target => "_blank"}= @player.twitter
-                                - if !@player.facebook.to_s.empty?
-                                    .col-md-4.col-sm-6
-                                        %h5.strong Facebook
-                                        %blockquote
-                                            %p
-                                                %a{:href => "http://facebook.com/#{@player.facebook}", :target => "_blank"}= @player.facebook
                                 - if !@player.steam.to_s.empty?
                                     .col-md-4.col-sm-6
                                         %h5.strong Steam
                                         %blockquote
                                             %p
                                                 %a{:href => "http://steamcommunity.com/id/#{@player.steam}", :target => "_blank"}= @player.steam
-                                - if @player.channels_for(:youtube).exists?
+                                -#- if @player.channels_for(:youtube).exists?
                                     .col-md-4.col-sm-6
                                         %h5.strong YouTube
                                         %blockquote

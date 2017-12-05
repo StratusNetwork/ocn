@@ -1,22 +1,19 @@
 %section
-    - if user_signed_in? && current_user.beta_participant?
-        .row
-            .col-md-3
+    .row
+        .col-md-3.forum-sidebar
+            #subforum-list
                 %ul.nav.nav-pills.nav-stacked#information
+                    %h4.strong.center General
                     %li.active
-                        %a{:href => '#settings', :data => {:toggle => 'pill'}}
-                            %i.fa.fa-sliders
-                            User Settings
-                    %li
-                        %a{:href => '#login', :data => {:toggle => 'pill'}}
-                            %i.fa.fa-lock
-                            Login Information
-                    %li
                         %a{:href => '#personal', :data => {:toggle => 'pill'}}
                             %i.fa.fa-user
                             Personal Information
                     %li
-                        %a{:href => '#connected', :data => {:toggle => 'pill'}}
+                        %a{:href => '#login', :data => {:toggle => 'pill'}}
+                            %i.fa.fa-lock
+                            Login Information
+                    -#%li
+                        %a{:href => '#accounts', :data => {:toggle => 'pill'}}
                             %i.fa.fa-chain
                             Connected Accounts
                     %li
@@ -27,16 +24,17 @@
                         %a{:href => '#profile', :data => {:toggle => 'pill'}}
                             %i.fa.fa-pencil
                             Profile Customization
+                    %h4.strong.center Settings
                     %li
-                        %a{:href => '#website', :data => {:toggle => 'pill'}}
-                            %i.fa.fa-paint-brush
-                            Website Customization
-                    %li.divider
-                    - if current_user.premium?
-                        %li
-                            %a{:href => '#premium', :data => {:toggle => 'pill'}}
-                                %i.fa.fa-star
-                                Premium Features
+                        %a{:href => '#premium_settings', :data => {:toggle => 'pill'}}
+                            %i.fa.fa-star
+                            Premium Settings
+                    %li
+                        %a{:href => '#web_settings', :data => {:toggle => 'pill'}}
+                            %i.fa.fa-mouse-pointer
+                            Website Settings
+                    - if current_user.can_edit_verified_profile? || current_user.can_auth_with_key?
+                        %h4.strong.center Staff Resources
                     - if current_user.can_edit_verified_profile?
                         %li
                             %a{:href => '#verified', :data => {:toggle => 'pill'}}
@@ -47,14 +45,171 @@
                             %a{:href => '#api', :data => {:toggle => 'pill'}}
                                 %i.fa.fa-database
                                 API
-            .col-md-9
-                .tab-content
-                    .tab-pane.fade.in.active#settings
-                        %h3.strong User Settings
-                        %hr
-                        .row
+        .col-md-9
+            .tab-content
+                .tab-pane.fade.active.in#personal
+                    %h3.strong Personal Information
+                    %hr
+                    .row
+                        = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+                            .col-md-6
+                                .form-group
+                                    = f.label :gender, "Gender"
+                                    = f.select :gender, [nil, "Male", "Female", "Other"], { :disabled => (@disabled.include? :gender) }, :class => 'form-control'
+                                .form-group
+                                    = f.label :location, "Location"
+                                    = f.text_field :location, :disabled => (@disabled.include? :location), :class => 'form-control'
+                            .col-md-6
+                                .form-group
+                                    = f.label :occupation, "Occupation"
+                                    = f.text_field :occupation, :disabled => (@disabled.include? :occupation), :class => 'form-control'
+                                .form-group
+                                    = f.label :interests, "Interests"
+                                    = f.text_field :interests, :disabled => (@disabled.include? :interests), :class => 'form-control'
+                            .col-md-12
+                                .form-group
+                                    = f.submit "Update", :class => "btn btn-primary"
+                .tab-pane.fade#login
+                    %h3.strong Login Information
+                    %hr
+                    .row
+                        = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+                            .col-md-12
+                                .form-group
+                                    = f.label :email
+                                    = f.email_field :email, :disabled => (@disabled.include? :email), :class => 'form-control'
+                                .form-group
+                                    = f.label :password, "New password"
+                                    = f.password_field :password, :disabled => (@disabled.include? :password), :class => 'form-control'
+                                .form-group
+                                    = f.label :password_confirmation, "New password confirmation"
+                                    = f.password_field :password_confirmation, :disabled => (@disabled.include? :password), :class => 'form-control'
+                                .form-group
+                                    = f.label :current_password
+                                    = f.password_field :current_password, :disabled => (@disabled.include? :password), :class => 'form-control'
+                            .col-md-12
+                                .form-group
+                                    = f.submit "Update", :class => "btn btn-primary"
+                -#.tab-pane.fade#accounts
+                    %h3.strong Connected Accounts
+                    %hr
+                    .row
+                        .col-md-4
+                            .col-md-6.col-xs-6.account-label
+                                .center
+                                    - if current_user.find_oauth2_token_for(:youtube)
+                                        .label.label-success Connected
+                                    - else
+                                        -#.label.label-default Not Connected
+                                        .label.label-default Coming Soon
+                            .col-md-6.col-xs-6.account-logo
+                                .center
+                                    %a
+                                        -# {href: oauth2_authorize_path(service: 'youtube')}
+                                        %img{src: image_path("youtube120.png")}
+                        .col-md-8
+                            - if current_user.find_oauth2_token_for(:youtube)
+                                = render partial: 'channels/list', locals: {channels: current_user.channels_for(:youtube), first_index: nil}
+                            - else
+                                %p
+                                    Click the logo to connect your YouTube account and display a link to your channel in your
+                                    = succeed "." do
+                                        %a{href: user_path(current_user)} profile
+                                -# %p
+                                    If you are a member of the
+                                    Let's Play group, you will also get a YouTube badge, and your channel will be listed on the
+                                    %a{href: channels_path} channels
+                                    page.
+                .tab-pane.fade#social
+                    %h3.strong Social Media
+                    %hr
+                    .row
+                        = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+                            .col-md-6
+                                .form-group
+                                    = f.label :public_email, "Public Email"
+                                    = f.text_field :public_email, :disabled => (@disabled.include? :public_email), :class => 'form-control'
+                                .form-group
+                                    = f.label :twitter, "Twitter"
+                                    = f.text_field :twitter, :disabled => (@disabled.include? :twitter), :class => 'form-control'
+                                .form-group
+                                    = f.label :steam, "Steam"
+                                    = f.text_field :steam, :disabled => (@disabled.include? :steam), :class => 'form-control'
+                                .form-group
+                                    = f.label :twitch, "Twitch"
+                                    = f.text_field :twitch, :disabled => (@disabled.include? :twitch), :class => 'form-control'
+                            .col-md-6
+                                .form-group
+                                    = f.label :github, "GitHub"
+                                    = f.text_field :github, :disabled => (@disabled.include? :github), :class => 'form-control'
+                                .form-group
+                                    = f.label :reddit, "Reddit"
+                                    = f.text_field :reddit, :disabled => (@disabled.include? :reddit), :class => 'form-control'
+                                .form-group
+                                    = f.label :discord, "Discord"
+                                    = f.text_field :discord, :disabled => (@disabled.include? :discord), :class => 'form-control'
+                            .col-md-12
+                                .form-group
+                                    = f.submit "Update", :class => "btn btn-primary"
+                .tab-pane.fade#profile
+                    %h3.strong Profile Customization
+                    %hr
+                    .row
+                        .col-md-12
+                            %p
+                                Use this box to add custom content to the bottom of your
+                                = succeed "." do
+                                    %a{href: user_path(current_user)} profile
+                                You can use HTML and put anything in here, with a few exceptions:
+                                %ul
+                                    %li
+                                        Follow our general
+                                        %a{href: rules_path} rules
+                                        for website behavior.
+                                    %li Don't try to break out of the box that contains the content.
+                                %strong Failure to follow these rules will result in your profile being cleared and permanently locked.
+                        .col-md-12
                             = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                                .col-md-6
+                                .form-group
+                                    = f.text_area :about, :style => "height: 200px", :class => "emojify form-control", :disabled => (@disabled.include? :about)
+                                .form-group
+                                    = f.submit "Update", :class => "btn btn-primary"
+                .tab-pane.fade#premium_settings
+                    %h3.strong Premium Settings
+                    %hr
+                    %p
+                        Purchase a premium rank from our
+                        %a{:href => main_app.shop_path} shop page
+                        to have access to Premium Features.
+                    .row
+                        = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+                            .col-md-6
+                                .form-group{style: "margin-top: 16px;"}
+                                    = f.label :default_server_id, 'Default Server'
+                                    = f.select :default_server_id, [nil, *Server.bukkits.searchable.sort_by(&:name).map{|s| [s.name, s.id]}], { :model => Server }, :class => 'form-control', :disabled => !@user.can_set_default_server?
+                                .form-group{style: "margin-top: 16px;"}
+                                    = f.label :death_screen, 'Death Screen'
+                                    = f.select :death_screen, User.death_screens.invert, { :model => String }, :class => 'form-control', :disabled => !@user.can_set_death_screen?
+                            .col-md-6
+                                .well.well-settings
+                                    .checkbox{toggle: "tooltip", placement: "bottom", title: "Enables Beta Participation and shows features that are in the beta stage. These features might not be fully implemented yet and might not work properly."}
+                                        = f.label :beta_participant do
+                                            = f.check_box :beta_participant, :disabled => !@user.can_set_beta_participant?
+                                            Enable Beta Participation
+                            .col-md-12
+                                .form-group
+                                    = f.submit "Update", :class => "btn btn-primary"
+                .tab-pane.fade#web_settings
+                    %h3.strong Website Settings
+                    %hr
+                    .row
+                        = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+                            .col-md-6
+                                .form-group{style: "margin-top: 16px;"}
+                                    = f.label :web_theme, 'Themes'
+                                    = f.select :web_theme, ["Default", "Dark Theme"], { :model => String }, :class => 'form-control'
+                            .col-md-6
+                                .well.well-settings
                                     .checkbox
                                         = f.label :forem_auto_subscribe do
                                             = f.check_box :forem_auto_subscribe, :disabled => (@disabled.include? :forem_auto_subscribe)
@@ -75,186 +230,17 @@
                                         = f.label :display_server do
                                             = f.check_box :display_server, :disabled => (@disabled.include? :display_server)
                                             Show the server I'm playing on in my profile
-                                .col-md-6
-                                    .form-group{style: "margin-top: 16px;"}
-                                        = f.label :time_zone_name, 'Time Zone'
-                                        = f.time_zone_select :time_zone_name, TZInfo::Timezone.all.sort, { :model => TZInfo::Timezone, :disabled => (@disabled.include? :time_zone_name) }, :class => 'form-control'
-                                .col-md-12
-                                    .form-group
-                                        = f.submit "Update", :class => "btn btn-primary"
-                    .tab-pane.fade#login
-                        %h3.strong Login Information
-                        %hr
-                        .row
-                            = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                                .col-md-12
-                                    .form-group
-                                        = f.label :email
-                                        = f.email_field :email, :disabled => (@disabled.include? :email), :class => 'form-control'
-                                    .form-group
-                                        = f.label :password, "New password"
-                                        = f.password_field :password, :disabled => (@disabled.include? :password), :class => 'form-control'
-                                    .form-group
-                                        = f.label :password_confirmation, "New password confirmation"
-                                        = f.password_field :password_confirmation, :disabled => (@disabled.include? :password), :class => 'form-control'
-                                    .form-group
-                                        = f.label :current_password
-                                        = f.password_field :current_password, :disabled => (@disabled.include? :password), :class => 'form-control'
-                                .col-md-12
-                                    .form-group
-                                        = f.submit "Update", :class => "btn btn-primary"
-                    .tab-pane.fade#personal
-                        %h3.strong Personal Information
-                        %hr
-                        .row
-                            = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                                .col-md-6
-                                    .form-group
-                                        = f.label :gender, "Gender"
-                                        = f.select :gender, [nil, "Male", "Female", "Other"], { :disabled => (@disabled.include? :gender) }, :class => 'form-control'
-                                    .form-group
-                                        = f.label :location, "Location"
-                                        = f.text_field :location, :disabled => (@disabled.include? :location), :class => 'form-control'
-                                .col-md-6
-                                    .form-group
-                                        = f.label :occupation, "Occupation"
-                                        = f.text_field :occupation, :disabled => (@disabled.include? :occupation), :class => 'form-control'
-                                    .form-group
-                                        = f.label :interests, "Interests"
-                                        = f.text_field :interests, :disabled => (@disabled.include? :interests), :class => 'form-control'
-                                .col-md-12
-                                    .form-group
-                                        = f.submit "Update", :class => "btn btn-primary"
-                    .tab-pane.fade#connected
-                        %h3.strong Connected Accounts
-                        %hr
-                        .row
-                            .col-md-4
-                                .col-md-6.col-xs-6.account-label
-                                    .center
-                                        - if current_user.find_oauth2_token_for(:youtube)
-                                            .label.label-success Connected
-                                        - else
-                                            -#.label.label-default Not Connected
-                                            .label.label-default Coming Soon
-                                .col-md-6.col-xs-6.account-logo
-                                    .center
-                                        %a
-                                            -# {href: oauth2_authorize_path(service: 'youtube')}
-                                            %img{src: image_path("youtube120.png")}
-                            .col-md-8
-                                - if current_user.find_oauth2_token_for(:youtube)
-                                    = render partial: 'channels/list', locals: {channels: current_user.channels_for(:youtube), first_index: nil}
-                                - else
-                                    %p
-                                        Click the logo to connect your YouTube account and display a link to your channel in your
-                                        = succeed "." do
-                                            %a{href: user_path(current_user)} profile
-                                    %p
-                                        If you are a member of the
-                                        Let's Play group, you will also get a YouTube badge, and your channel will be listed on the
-                                        %a{href: channels_path} channels
-                                        page.
-                    .tab-pane.fade#social
-                        %h3.strong Social Media
-                        %hr
-                        .row
-                            .col-md-12
-                                %p
-                                    These accounts will be linked from your
-                                    = succeed "," do
-                                        %a{href: user_path(current_user)} profile
-                                    but otherwise do nothing special (yet).
-                            %br
-                            .col-md-12
-                                .row
-                                    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                                        .col-md-6
-                                            .form-group
-                                                = f.label :public_email, "Public Email"
-                                                = f.text_field :public_email, :disabled => (@disabled.include? :public_email), :class => 'form-control'
-                                            .form-group
-                                                = f.label :twitter, "Twitter"
-                                                = f.text_field :twitter, :disabled => (@disabled.include? :twitter), :class => 'form-control'
-                                            .form-group
-                                                = f.label :steam, "Steam"
-                                                = f.text_field :steam, :disabled => (@disabled.include? :steam), :class => 'form-control'
-                                            .form-group
-                                                = f.label :twitch, "Twitch"
-                                                = f.text_field :twitch, :disabled => (@disabled.include? :twitch), :class => 'form-control'
-                                        .col-md-6
-                                            .form-group
-                                                = f.label :github, "GitHub"
-                                                = f.text_field :github, :disabled => (@disabled.include? :github), :class => 'form-control'
-                                            .form-group
-                                                = f.label :reddit, "Reddit"
-                                                = f.text_field :reddit, :disabled => (@disabled.include? :reddit), :class => 'form-control'
-                                            .form-group
-                                                = f.label :discord, "Discord"
-                                                = f.text_field :discord, :disabled => (@disabled.include? :discord), :class => 'form-control'
-                                        .col-md-12
-                                            .form-group
-                                                = f.submit "Update", :class => "btn btn-primary"
-                    .tab-pane.fade#profile
-                        %h3.strong Profile Customization
-                        %hr
-                        .row
-                            .col-md-12
-                                %p
-                                    Use this box to add custom content to the bottom of your
-                                    = succeed "." do
-                                        %a{href: user_path(current_user)} profile
-                                    You can use HTML and put anything in here, with a few exceptions:
-                                    %ul
-                                        %li
-                                            Follow our general
-                                            %a{href: rules_path} rules
-                                            for website behavior.
-                                        %li Don't try to break out of the box that contains the content.
-                                    %strong Failure to follow these rules will result in your profile being cleared and permanently locked.
-                            .col-md-12
-                                = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                                    .form-group
-                                        = f.text_area :about, :style => "height: 200px", :class => "emojify form-control", :disabled => (@disabled.include? :about)
-                                    .form-group
-                                        = f.submit "Update", :class => "btn btn-primary"
-                    .tab-pane.fade#website
-                        %h3.strong Website Customization
-                        %hr
-                        .row
-                            = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                                .col-md-6
-                                    .form-group{style: "margin-top: 16px;"}
-                                        = f.label :web_theme, 'Themes'
-                                        = f.select :web_theme, ["Default", "Dark Theme"], { :model => String }, :class => 'form-control'
-                                .col-md-6
                                     .checkbox{toggle: "tooltip", placement: "bottom", title: "Dyslexia Assist replaces the default website font with OpenDyslexic to help users with dyslexia. When this option is toggled on, the website may look weird because of the width changes caused by the font."}
                                         = f.label :dyslexia_assist do
                                             = f.check_box :dyslexia_assist, :disabled => (@disabled.include? :dyslexia_assist)
-                                            Dyslexia Assist
-                                .col-md-12
-                                    .form-group
-                                        = f.submit "Update", :class => "btn btn-primary"
-                    .tab-pane.fade#premium
-                        %h3.strong Premium Features
-                        %hr
-                        .row
-                            = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                                .col-md-6
-                                    .form-group{style: "margin-top: 16px;"}
-                                        = f.label :default_server_id, 'Default Server'
-                                        = f.select :default_server_id, [nil, *Server.bukkits.searchable.sort_by(&:name).map{|s| [s.name, s.id]}], { :model => Server }, :class => 'form-control', :disabled => !@user.can_set_default_server?
-                                    .form-group{style: "margin-top: 16px;"}
-                                        = f.label :death_screen, 'Death Screen'
-                                        = f.select :death_screen, User.death_screens.invert, { :model => String }, :class => 'form-control', :disabled => !@user.can_set_death_screen?
-                                .col-md-6
-                                    .checkbox
-                                        = f.label :beta_participant do
-                                            = f.check_box :beta_participant, :disabled => (@disabled.include? :beta_participant)
-                                            Beta Participation
-                                .col-md-12
-                                    .form-group
-                                        = f.submit "Update", :class => "btn btn-primary"
+                                            Enable Dyslexia Assist
+                                .form-group{style: "margin-top: 16px;"}
+                                    = f.label :time_zone_name, 'Time Zone'
+                                    = f.time_zone_select :time_zone_name, TZInfo::Timezone.all.sort, { :model => TZInfo::Timezone, :disabled => (@disabled.include? :time_zone_name) }, :class => 'form-control'
+                            .col-md-12
+                                .form-group
+                                    = f.submit "Update", :class => "btn btn-primary"
+                - if current_user.can_edit_verified_profile?
                     .tab-pane.fade#verified
                         %h3.strong Verified Information
                         %hr
@@ -262,7 +248,7 @@
                             .col-md-12
                                 %p
                                     These fields affect site functionality in various ways, and are trusted to be accurate.
-                                    Only certain staff members have access to these.
+                                    Only certain staff members have access these.
                             .col-md-12
                                 .row
                                     = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
@@ -287,284 +273,31 @@
                                         .col-md-12
                                             .form-group
                                                 = f.submit "Update", class: "btn btn-primary", style: "margin-top: 28px;"
+                - if current_user.can_auth_with_key?
                     .tab-pane.fade#api
                         %h3.strong
                         %hr
-                        .row
-                            - if current_user.has_api_key?
-                                .row
-                                    .col-md-3
-                                        %a.btn.btn-warning{href: generate_api_key_path, data: {method: 'POST', confirm: "Replace your current API key?"}}
-                                            Replace API key
-                                    .col-md-9
-                                        Replace your current API key with a newly generated one.
-                                .row
-                                    .col-md-12
-                                        &nbsp;
-                                .row
-                                    .col-md-3
-                                        %a.btn.btn-danger{href: revoke_api_key_path, data: {method: 'POST', confirm: "Permanently disable your API key?"}}
-                                            Revoke API key
-                                    .col-md-9
-                                        Permanently disable your current API key.
-                                        You will have to generate a new key to use the API again.
-                            - else
-                                .row
-                                    .col-md-3
-                                        %a.btn.btn-primary{href: generate_api_key_path, data: {method: 'POST'}}
-                                            Generate API key
-                                    .col-md-9
-                                        Generate a secret key that you can use to access the API.
-    - else
-        .row
-            .col-md-4
-                %h3.strong Login
-                %hr
-                = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                    .form-group
-                        = f.label :email
-                        = f.email_field :email, :disabled => (@disabled.include? :email), :class => 'form-control'
-                    .form-group
-                        = f.label :password, "New password"
-                        = f.password_field :password, :disabled => (@disabled.include? :password), :class => 'form-control'
-                    .form-group
-                        = f.label :password_confirmation, "New password confirmation"
-                        = f.password_field :password_confirmation, :disabled => (@disabled.include? :password), :class => 'form-control'
-                    .form-group
-                        = f.label :current_password
-                        = f.password_field :current_password, :disabled => (@disabled.include? :password), :class => 'form-control'
-                    .form-group
-                        = f.submit "Update", :class => "btn btn-primary"
-            .col-md-4
-                %h3.strong Personal
-                %hr
-                = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                    .form-group
-                        = f.label :gender, "Gender"
-                        = f.select :gender, [nil, "Male", "Female", "Other"], { :disabled => (@disabled.include? :gender) }, :class => 'form-control'
-                    .form-group
-                        = f.label :location, "Location"
-                        = f.text_field :location, :disabled => (@disabled.include? :location), :class => 'form-control'
-                    .form-group
-                        = f.label :occupation, "Occupation"
-                        = f.text_field :occupation, :disabled => (@disabled.include? :occupation), :class => 'form-control'
-                    .form-group
-                        = f.label :interests, "Interests"
-                        = f.text_field :interests, :disabled => (@disabled.include? :interests), :class => 'form-control'
-                    .form-group
-                        = f.submit "Update", :class => "btn btn-primary"
-            .col-md-4
-                %h3.strong Settings
-                %hr
-                = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                    .checkbox
-                        = f.label :forem_auto_subscribe do
-                            = f.check_box :forem_auto_subscribe, :disabled => (@disabled.include? :forem_auto_subscribe)
-                            Subscribe to topics when I reply
-                    .checkbox
-                        = f.label :quote_notification do
-                            = f.check_box :quote_notification, :disabled => (@disabled.include? :quote_notification)
-                            Alert me when my posts are quoted
-                    .checkbox
-                        = f.label :allow_package_gifts do
-                            = f.check_box :allow_package_gifts, :disabled => (@disabled.include? :allow_package_gifts)
-                            Accept shop gifts from other users
-                    .checkbox
-                        = f.label :receive_requests do
-                            = f.check_box :receive_requests, :disabled => (@disabled.include? :receive_requests)
-                            Accept friend requests from other users
-                    .checkbox
-                        = f.label :display_server do
-                            = f.check_box :display_server, :disabled => (@disabled.include? :display_server)
-                            Show the server I'm playing on in my profile
-                    .form-group{style: "margin-top: 16px;"}
-                        = f.label :time_zone_name, 'Time Zone'
-                        = f.time_zone_select :time_zone_name, TZInfo::Timezone.all.sort, { :model => TZInfo::Timezone, :disabled => (@disabled.include? :time_zone_name) }, :class => 'form-control'
-                    .form-group
-                        = f.submit "Update", :class => "btn btn-primary"
-        .row
-            .col-md-4
-                %h3.strong Premium Features
-                %hr
-                = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                    .form-group{style: "margin-top: 16px;"}
-                        = f.label :default_server_id, 'Default Server'
-                        = f.select :default_server_id, [nil, *Server.bukkits.searchable.sort_by(&:name).map{|s| [s.name, s.id]}], { :model => Server }, :class => 'form-control', :disabled => !@user.can_set_default_server?
-                    .form-group{style: "margin-top: 16px;"}
-                        = f.label :death_screen, 'Death Screen'
-                        = f.select :death_screen, User.death_screens.invert, { :model => String }, :class => 'form-control', :disabled => !@user.can_set_death_screen?
-                    - if current_user.premium?
-                        .checkbox
-                            = f.label :beta_participant do
-                                = f.check_box :beta_participant, :disabled => (@disabled.include? :beta_participant)
-                                Beta Participation
-                    .form-group
-                        = f.submit "Update", :class => "btn btn-primary"
-            .col-md-4
-                %h3.strong Website Customization
-                %hr
-                = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                    .form-group{style: "margin-top: 16px;"}
-                        = f.label :web_theme, 'Themes'
-                        = f.select :web_theme, ["Default", "Dark Theme"], { :model => String }, :class => 'form-control'
-                    .checkbox{toggle: "tooltip", placement: "bottom", title: "Dyslexia Assist replaces the default website font with OpenDyslexic to help users with dyslexia. When this option is toggled on, the website may look weird because of the width changes caused by the font."}
-                        = f.label :dyslexia_assist do
-                            = f.check_box :dyslexia_assist, :disabled => (@disabled.include? :dyslexia_assist)
-                            Dyslexia Assist
-                    .form-group
-                        = f.submit "Update", :class => "btn btn-primary"
-            .col-md-4
-                %h3.strong Connected Accounts
-                %hr
-                .row
-                    .col-md-6.col-xs-6.account-label
-                        .center
-                            - if current_user.find_oauth2_token_for(:youtube)
-                                .label.label-success Connected
-                            - else
-                                -#.label.label-default Not Connected
-                                .label.label-default Coming Soon
-                    .col-md-6.col-xs-6.account-logo
-                        .center
-                            %a
-                                -# {href: oauth2_authorize_path(service: 'youtube')}
-                                %img{src: image_path("youtube120.png")}
-                .row
-                    .col-md-12
-                        - if current_user.find_oauth2_token_for(:youtube)
-                            = render partial: 'channels/list', locals: {channels: current_user.channels_for(:youtube), first_index: nil}
+                        - if current_user.has_api_key?
+                            .row
+                                .col-md-3
+                                    %a.btn.btn-warning{href: generate_api_key_path, data: {method: 'POST', confirm: "Replace your current API key?"}}
+                                        Replace API key
+                                .col-md-9
+                                    Replace your current API key with a newly generated one.
+                            .row
+                                .col-md-12
+                                    &nbsp;
+                            .row
+                                .col-md-3
+                                    %a.btn.btn-danger{href: revoke_api_key_path, data: {method: 'POST', confirm: "Permanently disable your API key?"}}
+                                        Revoke API key
+                                .col-md-9
+                                    Permanently disable your current API key.
+                                    You will have to generate a new key to use the API again.
                         - else
-                            %p
-                                Click the logo to connect your YouTube account and display a link to your channel in your
-                                = succeed "." do
-                                    %a{href: user_path(current_user)} profile
-                            %p
-                                If you are a member of the
-                                Let's Play group, you will also get a YouTube badge, and your channel will be listed on the
-                                %a{href: channels_path} channels
-                                page.
-        .row
-            .col-md-12
-                %h3.strong Other Accounts
-                %hr
-                %p
-                    These accounts will be linked from your
-                    = succeed "," do
-                        %a{href: user_path(current_user)} profile
-                    but otherwise do nothing special (yet).
-
-        = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-            .row
-                .form-group.col-md-4
-                    = f.label :public_email, "Public Email"
-                    = f.text_field :public_email, :disabled => (@disabled.include? :public_email), :class => 'form-control'
-                .form-group.col-md-4
-                    = f.label :skype, "Skype"
-                    = f.text_field :skype, :disabled => (@disabled.include? :skype), :class => 'form-control'
-                .form-group.col-md-4
-                    = f.label :twitter, "Twitter"
-                    = f.text_field :twitter, :disabled => (@disabled.include? :twitter), :class => 'form-control'
-            .row
-                .form-group.col-md-4
-                    = f.label :facebook, "Facebook"
-                    = f.text_field :facebook, :disabled => (@disabled.include? :facebook), :class => 'form-control'
-                .form-group.col-md-4
-                    = f.label :steam, "Steam"
-                    = f.text_field :steam, :disabled => (@disabled.include? :steam), :class => 'form-control'
-                .form-group.col-md-4
-                    = f.label :twitch, "Twitch"
-                    = f.text_field :twitch, :disabled => (@disabled.include? :twitch), :class => 'form-control'
-            .row
-                .form-group.col-md-4
-                    = f.label :github, "GitHub"
-                    = f.text_field :github, :disabled => (@disabled.include? :github), :class => 'form-control'
-                .form-group.col-md-4
-                    = f.label :reddit, "Reddit"
-                    = f.text_field :reddit, :disabled => (@disabled.include? :reddit), :class => 'form-control'
-                .form-group.col-md-4
-                    = f.label :discord, "Discord"
-                    = f.text_field :discord, :disabled => (@disabled.include? :discord), :class => 'form-control'
-            .row
-                .form-group.col-md-8
-                    = f.submit "Update", :class => "btn btn-primary", :style => "margin-top: 28px;"
-        - if current_user.can_edit_verified_profile?
-            .row
-                .col-md-12
-                    %h3.strong Verified Info
-                    %hr
-                    %p
-                        These fields affect site functionality in various ways, and are trusted to be accurate.
-                        Only certain staff members have access to these.
-            = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                .row
-                    .form-group.col-md-4
-                        = f.label :external_emails, "External emails (one per line)"
-                        %p Used to identify you in various external places, such as Git commits.
-                        = f.text_area :external_emails, class: 'form-control', style: 'height: 200px', value: resource.external_emails.map{|e| "#{e}\n"}.join
-                    .col-md-4
-                        .form-group
-                            = f.label :github_verified, "GitHub username"
-                            %p
-                                Used to identify you on
-                                %a{href: 'https://github.com/'} GitHub
-                            = f.text_field :github_verified, class: 'form-control'
-                        .form-group
-                            = f.label :gitlab_verified, "GitLab username"
-                            %p
-                                Used to identify you on our internal
-                                %a{href: "https://code.#{ORG::DOMAIN}/"} GitLab
-                            = f.text_field :gitlab_verified, class: 'form-control'
-                    .col-md-4
-                .row
-                    .form-group.col-md-8
-                        = f.submit "Update", class: "btn btn-primary", style: "margin-top: 28px;"
-        .row
-            .col-md-12
-                %h3.strong Profile
-                %hr
-                = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-                    %p
-                        Use this box to add custom content to the bottom of your
-                        = succeed "." do
-                            %a{href: user_path(current_user)} profile
-                        You can use HTML and put anything in here, with a few exceptions:
-                        %ul
-                            %li
-                                Follow our general
-                                %a{href: rules_path} rules
-                                for website behavior.
-                            %li Don't try to break out of the box that contains the content.
-                        %strong Failure to follow these rules will result in your profile being cleared and permanently locked.
-                    .form-group
-                        = f.text_area :about, :style => "height: 200px", :class => "emojify form-control", :disabled => (@disabled.include? :about)
-                    .form-group
-                        = f.submit "Update", :class => "btn btn-primary"
-        - if current_user.can_auth_with_key?
-            .row
-                .col-md-12
-                    %h3.strong API Key
-                    %hr
-            - if current_user.has_api_key?
-                .row
-                    .col-md-3
-                        %a.btn.btn-warning{href: generate_api_key_path, data: {method: 'POST', confirm: "Replace your current API key?"}}
-                            Replace API key
-                    .col-md-9
-                        Replace your current API key with a newly generated one.
-                .row
-                    .col-md-12
-                        &nbsp;
-                .row
-                    .col-md-3
-                        %a.btn.btn-danger{href: revoke_api_key_path, data: {method: 'POST', confirm: "Permanently disable your API key?"}}
-                            Revoke API key
-                    .col-md-9
-                        Permanently disable your current API key.
-                        You will have to generate a new key to use the API again.
-            - else
-                .row
-                    .col-md-3
-                        %a.btn.btn-primary{href: generate_api_key_path, data: {method: 'POST'}}
-                            Generate API key
-                    .col-md-9
-                        Generate a secret key that you can use to access the API.
+                            .row
+                                .col-md-3
+                                    %a.btn.btn-primary{href: generate_api_key_path, data: {method: 'POST'}}
+                                        Generate API key
+                                .col-md-9
+                                    Generate a secret key that you can use to access the API.
