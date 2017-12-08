@@ -26,10 +26,10 @@
                             %div.staff-social
                                 - if member.twitter
                                     %a.staff-contact{:href => "http://twitter.com/" + member.twitter, :target => "_blank"}
-                                        %i.fa.fa-twitter
+                                        %i.fab.fa-twitter
                                 - if member.public_email
                                     %a.staff-contact{:href => "mailto:#{member.public_email}"}
                                         %i.fa.fa-envelope
                                 - if member.discord
                                     %a.staff-contact{:style => "cursor: pointer", :tabindex => "0", :"data-toggle" => "popover", :"data-placement" => "bottom", :"data-trigger" => "focus", :"data-content" => member.discord}
-                                        %i.fa.fa-microphone
+                                        %i.fab.fa-discord
