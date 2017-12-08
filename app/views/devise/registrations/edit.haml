@@ -14,7 +14,7 @@
                             Login Information
                     -#%li
                         %a{:href => '#accounts', :data => {:toggle => 'pill'}}
-                            %i.fa.fa-chain
+                            %i.fa.fa-link
                             Connected Accounts
                     %li
                         %a{:href => '#social', :data => {:toggle => 'pill'}}
@@ -22,7 +22,7 @@
                             Social Media
                     %li
                         %a{:href => '#profile', :data => {:toggle => 'pill'}}
-                            %i.fa.fa-pencil
+                            %i.fa.fa-edit
                             Profile Customization
                     %h4.strong.center Settings
                     %li
@@ -31,7 +31,7 @@
                             Premium Settings
                     %li
                         %a{:href => '#web_settings', :data => {:toggle => 'pill'}}
-                            %i.fa.fa-mouse-pointer
+                            %i.fa.fa-laptop
                             Website Settings
                     - if current_user.can_edit_verified_profile? || current_user.can_auth_with_key?
                         %h4.strong.center Staff Resources

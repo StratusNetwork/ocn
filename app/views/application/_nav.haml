@@ -19,7 +19,7 @@
                         Play
                 %li{:class => (controller_name == 'maps' ? "active" : nil )}
                     %a{:href => main_app.maps_path}
-                        %i.fa.fa-cubes
+                        %i.fa.fa-folder-open
                         Maps
                 %li.dropdown{:class => controller_name == 'users' || controller_name == 'channels' ? 'active' : nil}
                     %a.dropdown-toggle{:href => "#", :data => {:toggle => "dropdown"}}
@@ -29,7 +29,7 @@
                     %ul.dropdown-menu
                         %li
                             %a{:href => main_app.url_for(controller: '/users', action: 'stats')}
-                                %i.fa.fa-line-chart
+                                %i.fa.fa-chart-line
                                 Stats
                         %li
                             %a{:href => main_app.staff_index_path}
@@ -49,7 +49,7 @@
                     %ul.dropdown-menu
                         %li
                             %a{:href => main_app.teams_path}
-                                %i.fa.fa-group
+                                %i.fa.fa-users
                                 Teams
                         %li
                             %a{:href => main_app.tournaments_path}
@@ -68,7 +68,7 @@
                 - if @nav_live
                     %li{:class => (current_page?(main_app.live_path) ? 'active' : nil)}
                         %a{:href => main_app.live_path, :style => 'color: red'}
-                            %i.fa.fa-video-camera
+                            %i.fa.fa-video
                             .visible-xs-inline.visible-sm-inline
                                 Live
                 - unless @alerts.blank?

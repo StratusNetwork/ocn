@@ -14,7 +14,7 @@
                 #{ORG::NAME} - Minecraft PvP
         - if content_for? :noindex
             %meta{:name => "robots", :content => "noindex"}
-        = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css", "application", "//fonts.googleapis.com/css?family=Noto+Sans:700,400,300", "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css", "application", "//fonts.googleapis.com/css?family=Noto+Sans:700,400,300", "//use.fontawesome.com/releases/v5.0.0/css/all.css"
         - if user_signed_in? && current_user.dark_theme?
             = stylesheet_link_tag "dark-theme"
         - if user_signed_in? && current_user.dyslexia_assist?

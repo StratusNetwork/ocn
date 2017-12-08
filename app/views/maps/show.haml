@@ -24,7 +24,7 @@
                 - if @map.can_download?
                     -# Use POST to prevent denial of service from forged requests
                     = button_to download_map_path(@map), class: 'btn btn-primary pull-right-md' do
-                        %i.fa.fa-download
+                        %i.fa.fa-cloud-download-alt
                         Download
             %h2.strong{style: "margin-top: 0;"}
                 = @map.name

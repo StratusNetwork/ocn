@@ -26,7 +26,7 @@
             - if @actions.size > 0
                 .btn-group.pull-right
                     %button.btn.btn-default.btn-sm.dropdown-toggle{:data => {:toggle => "dropdown"}}
-                        %span.glyphicon.glyphicon-cog
+                        %span.fa.fa-cog
                         %span.caret
                     %ul.dropdown-menu
                         - @actions.each do |text, method, path|
@@ -163,25 +163,25 @@
                                                 %i.fa.fa-envelope
                                         - if !@player.twitter.to_s.empty?
                                             %a.btn.btn-default{:role => "button", :href => "http://twitter.com/#{@player.twitter}", :target => "_blank", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => "Twitter"}
-                                                %i.fa.fa-twitter
+                                                %i.fab.fa-twitter
                                         - if !@player.steam.to_s.empty?
                                             %a.btn.btn-default{:role => "button", :href => "http://steamcommunity.com/id/#{@player.steam}", :target => "_blank", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => "Steam"}
-                                                %i.fa.fa-steam
+                                                %i.fab.fa-steam
                                         -# - if @player.channels_for(:youtube).exists?
                                             %a.btn.btn-default{:role => "button", :href => link_to_youtube_channel(@player), :target => "_blank", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => "YouTube"}
-                                                %i.fa.fa-youtube
+                                                %i.fab.fa-youtube
                                         - if !@player.twitch.to_s.empty?
                                             %a.btn.btn-default{:role => "button", :href => "http://twitch.tv/#{@player.twitch}", :target => "_blank", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => "Twitch"}
-                                                %i.fa.fa-twitch
+                                                %i.fab.fa-twitch
                                         - if !@player.github.to_s.empty?
                                             %a.btn.btn-default{:role => "button", :href => "https://github.com/#{@player.github}", :target => "_blank", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => "Github"}
-                                                %i.fa.fa-github
+                                                %i.fab.fa-github
                                         - if !@player.reddit.to_s.empty?
                                             %a.btn.btn-default{:role => "button", :href => "http://reddit.com/user/#{@player.reddit}", :target => "_blank", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => "Reddit"}
-                                                %i.fa.fa-reddit
+                                                %i.fab.fa-reddit
                                         - if !@player.discord.to_s.empty?
                                             %a.btn.btn-default{:role => "button", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => @player.discord}
-                                                %i.fa.fa-microphone
+                                                %i.fab.fa-discord
                             .row
                                 - if team = @player.team
                                     .col-md-4.col-sm-6
