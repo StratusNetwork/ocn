@@ -1386,7 +1386,7 @@
             }), group2);
             buttons.quote = makeButton("wmd-quote-button", "Blockquote", "Q", "fa fa-quote-left", bindCommand("doBlockquote"), group2);
             buttons.code = makeButton("wmd-code-button", "Code Sample", "K", "fa fa-code", bindCommand("doCode"), group2);
-            buttons.image = makeButton("wmd-image-button", "Image", "G", "fa fa-picture-o", bindCommand(function (chunk, postProcessing) {
+            buttons.image = makeButton("wmd-image-button", "Image", "G", "fa fa-image", bindCommand(function (chunk, postProcessing) {
                 return this.doLinkOrImage(chunk, postProcessing, true);
             }), group2);
 
@@ -1397,8 +1397,8 @@
             buttons.ulist = makeButton("wmd-ulist-button", "Bulleted List", "U", "fa fa-list-ul", bindCommand(function (chunk, postProcessing) {
                 this.doList(chunk, postProcessing, false);
             }), group3);
-            buttons.heading = makeButton("wmd-heading-button", "Heading", "H", "icon-header", bindCommand("doHeading"), group3);
-            buttons.hr = makeButton("wmd-hr-button", "Horizontal Rule", "R", "icon-hr-line", bindCommand("doHorizontalRule"), group3);
+            buttons.heading = makeButton("wmd-heading-button", "Heading", "H", "fa fa-heading", bindCommand("doHeading"), group3);
+            buttons.hr = makeButton("wmd-hr-button", "Horizontal Rule", "R", "fa fa-minus", bindCommand("doHorizontalRule"), group3);
 
             group4 = makeGroup(4);
             buttons.undo = makeButton("wmd-undo-button", "Undo", "Z", "fa fa-undo", null, group4);
@@ -1408,7 +1408,7 @@
                 "Y" :
                 "Shift+Z"; // mac and other non-Windows platforms
 
-            buttons.redo = makeButton("wmd-redo-button", "Redo", redoKeys, "fa fa-repeat", null, group4);
+            buttons.redo = makeButton("wmd-redo-button", "Redo", redoKeys, "fa fa-redo", null, group4);
             buttons.redo.execute = function (manager) { if (manager) manager.redo(); };
 
             if (helpOptions) {
