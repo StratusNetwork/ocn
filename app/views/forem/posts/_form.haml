@@ -7,38 +7,23 @@
 
 #wmd-help.modal.fade
     .modal-dialog
-        - if user_signed_in? && current_user.beta_participant?
-            .modal-content
-                .modal-header
-                    %button.close{:data => {:dismiss => "modal"}} &times;
-                    %h3.modal-title.strong Help
-                .modal-body
-                    %p.center.strong Select the category you need help with.
-                    .row
-                        %ul.thumbnails.list-unstyled
-                            %a{:href => "http://chibicode.github.io/markdown-toolbar-cheatsheet/", :target => "_blank"}
-                                %li.col-md-6.col-sm-12
-                                    .thumbnail.trophy
-                                        %div{:style => "background: #f5f5f5; color: #212121;"}
-                                            %i.fa.fa-hashtag
-                                        %h4.strong{:style => "color: #212121;"} Markdown
-                            %a{:href => "https://stratus.network/forums/posts/5a2ec1be9855c0000100007e", :target => "_blank"}
-                                %li.col-md-6.col-sm-12
-                                    .thumbnail.trophy
-                                        %div{:style => "background: #f5f5f5; color: #212121;"}
-                                            %i.fa.fa-user
-                                        %h4.strong{:style => "color: #212121;"} User Avatars
-        - else
-            .modal-content
-                .modal-header
-                    %button.close{:data => {:dismiss => "modal"}} &times;
-                    %h3.modal-title Markdown and Emoji Help
-                .modal-body
-                    %p.center Click either image for help with Markdown or Emoji.
-                    .row
-                        .col-md-6
-                            %a{:href => "http://chibicode.github.io/markdown-toolbar-cheatsheet/", :target => "_blank"}
-                                %img{:src => asset_path("help/markdown.png"), :width => "250px"}
-                        .col-md-6
-                            %a{:href => "http://emoji.muan.co/", :target => "_blank"}
-                                %img{:src => asset_path("help/emoji.png"), :width => "250px"}
+        .modal-content
+            .modal-header
+                %button.close{:data => {:dismiss => "modal"}} &times;
+                %h3.modal-title.strong Help
+            .modal-body
+                %p.center.strong Select the category you need help with.
+                .row
+                    %ul.thumbnails.list-unstyled
+                        %a{:href => "http://chibicode.github.io/markdown-toolbar-cheatsheet/", :target => "_blank"}
+                            %li.col-md-6.col-sm-12
+                                .thumbnail.trophy
+                                    %div{:style => "background: #f5f5f5; color: #212121;"}
+                                        %i.fa.fa-hashtag
+                                    %h4.strong{:style => "color: #212121;"} Markdown
+                        %a{:href => "https://stratus.network/forums/posts/5a2ec1be9855c0000100007e", :target => "_blank"}
+                            %li.col-md-6.col-sm-12
+                                .thumbnail.trophy
+                                    %div{:style => "background: #f5f5f5; color: #212121;"}
+                                        %i.fa.fa-user
+                                    %h4.strong{:style => "color: #212121;"} User Avatars

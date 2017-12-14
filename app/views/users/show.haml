@@ -154,97 +154,61 @@
                             %a{:href => "#alts", :data => {:toggle => "tab"}} Alts
                 .tab-content{:style => "overflow: visible;"}
                     .tab-pane.active#about
-                        - if user_signed_in? && current_user.beta_participant?
-                            .row
-                                .col-md-12
-                                    .btn-group.btn-group-justified
-                                        - if !@player.public_email.to_s.empty?
-                                            %a.btn.btn-default{:role => "button", :href => "mailto:#{@player.public_email}", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => "Email"}
-                                                %i.fa.fa-envelope
-                                        - if !@player.twitter.to_s.empty?
-                                            %a.btn.btn-default{:role => "button", :href => "http://twitter.com/#{@player.twitter}", :target => "_blank", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => "Twitter"}
-                                                %i.fab.fa-twitter
-                                        - if !@player.steam.to_s.empty?
-                                            %a.btn.btn-default{:role => "button", :href => "http://steamcommunity.com/id/#{@player.steam}", :target => "_blank", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => "Steam"}
-                                                %i.fab.fa-steam
-                                        -# - if @player.channels_for(:youtube).exists?
-                                            %a.btn.btn-default{:role => "button", :href => link_to_youtube_channel(@player), :target => "_blank", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => "YouTube"}
-                                                %i.fab.fa-youtube
-                                        - if !@player.twitch.to_s.empty?
-                                            %a.btn.btn-default{:role => "button", :href => "http://twitch.tv/#{@player.twitch}", :target => "_blank", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => "Twitch"}
-                                                %i.fab.fa-twitch
-                                        - if !@player.github.to_s.empty?
-                                            %a.btn.btn-default{:role => "button", :href => "https://github.com/#{@player.github}", :target => "_blank", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => "Github"}
-                                                %i.fab.fa-github
-                                        - if !@player.reddit.to_s.empty?
-                                            %a.btn.btn-default{:role => "button", :href => "http://reddit.com/user/#{@player.reddit}", :target => "_blank", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => "Reddit"}
-                                                %i.fab.fa-reddit
-                                        - if !@player.discord.to_s.empty?
-                                            %a.btn.btn-default{:role => "button", :"data-toggle" => "tooltip", :"data-placement" => "bottom", :title => @player.discord}
-                                                %i.fab.fa-discord
-                            .row
-                                - if team = @player.team
-                                    .col-md-4.col-sm-6
-                                        %h5.strong Team
-                                        %blockquote
-                                            %p
-                                                %a{:href => team_path(team)}= team.name
-                        - else
-                            .row
-                                - if !@player.public_email.to_s.empty?
-                                    .col-md-4.col-sm-6
-                                        %h5.strong Email
-                                        %blockquote
-                                            %p
-                                                %a{:href => "mailto:#{@player.public_email}"}= @player.public_email
-                                - if !@player.twitter.to_s.empty?
-                                    .col-md-4.col-sm-6
-                                        %h5.strong Twitter
-                                        %blockquote
-                                            %p
-                                                %a{:href => "http://twitter.com/#{@player.twitter}", :target => "_blank"}= @player.twitter
-                                - if !@player.steam.to_s.empty?
-                                    .col-md-4.col-sm-6
-                                        %h5.strong Steam
-                                        %blockquote
-                                            %p
-                                                %a{:href => "http://steamcommunity.com/id/#{@player.steam}", :target => "_blank"}= @player.steam
-                                -#- if @player.channels_for(:youtube).exists?
-                                    .col-md-4.col-sm-6
-                                        %h5.strong YouTube
-                                        %blockquote
-                                            %p
-                                                %a= link_to_youtube_channel(@player)
-                                - if !@player.twitch.to_s.empty?
-                                    .col-md-4.col-sm-6
-                                        %h5.strong Twitch
-                                        %blockquote
-                                            %p
-                                                %a{:href => "http://twitch.tv/#{@player.twitch}", :target => "_blank"}= @player.twitch
-                                - if !@player.github.to_s.empty?
-                                    .col-md-4.col-sm-6
-                                        %h5.strong Github
-                                        %blockquote
-                                            %p
-                                                %a{:href => "https://github.com/#{@player.github}", :target => "_blank"}= @player.github
-                                - if !@player.reddit.to_s.empty?
-                                    .col-md-4.col-sm-6
-                                        %h5.strong Reddit
-                                        %blockquote
-                                            %p
-                                                %a{:href => "http://reddit.com/user/#{@player.reddit}", :target => "_blank"}= @player.reddit
-                                - if !@player.discord.to_s.empty?
-                                    .col-md-4.col-sm-6
-                                        %h5.strong Discord
-                                        %blockquote
-                                            %p{:style => "color: #666"}
-                                                = @player.discord
-                                - if team = @player.team
-                                    .col-md-4.col-sm-6
-                                        %h5.strong Team
-                                        %blockquote
-                                            %p
-                                                %a{:href => team_path(team)}= team.name
+                        .row
+                            - if !@player.public_email.to_s.empty?
+                                .col-md-4.col-sm-6
+                                    %h5.strong Email
+                                    %blockquote
+                                        %p
+                                            %a{:href => "mailto:#{@player.public_email}"}= @player.public_email
+                            - if !@player.twitter.to_s.empty?
+                                .col-md-4.col-sm-6
+                                    %h5.strong Twitter
+                                    %blockquote
+                                        %p
+                                            %a{:href => "http://twitter.com/#{@player.twitter}", :target => "_blank"}= @player.twitter
+                            - if !@player.steam.to_s.empty?
+                                .col-md-4.col-sm-6
+                                    %h5.strong Steam
+                                    %blockquote
+                                        %p
+                                            %a{:href => "http://steamcommunity.com/id/#{@player.steam}", :target => "_blank"}= @player.steam
+                            -#- if @player.channels_for(:youtube).exists?
+                                .col-md-4.col-sm-6
+                                    %h5.strong YouTube
+                                    %blockquote
+                                        %p
+                                            %a= link_to_youtube_channel(@player)
+                            - if !@player.twitch.to_s.empty?
+                                .col-md-4.col-sm-6
+                                    %h5.strong Twitch
+                                    %blockquote
+                                        %p
+                                            %a{:href => "http://twitch.tv/#{@player.twitch}", :target => "_blank"}= @player.twitch
+                            - if !@player.github.to_s.empty?
+                                .col-md-4.col-sm-6
+                                    %h5.strong Github
+                                    %blockquote
+                                        %p
+                                            %a{:href => "https://github.com/#{@player.github}", :target => "_blank"}= @player.github
+                            - if !@player.reddit.to_s.empty?
+                                .col-md-4.col-sm-6
+                                    %h5.strong Reddit
+                                    %blockquote
+                                        %p
+                                            %a{:href => "http://reddit.com/user/#{@player.reddit}", :target => "_blank"}= @player.reddit
+                            - if !@player.discord.to_s.empty?
+                                .col-md-4.col-sm-6
+                                    %h5.strong Discord
+                                    %blockquote
+                                        %p{:style => "color: #666"}
+                                            = @player.discord
+                            - if team = @player.team
+                                .col-md-4.col-sm-6
+                                    %h5.strong Team
+                                    %blockquote
+                                        %p
+                                            %a{:href => team_path(team)}= team.name
                         .row
                             - if !@player.gender.to_s.empty?
                                 .col-sm-6

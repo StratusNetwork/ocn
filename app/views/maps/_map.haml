@@ -16,4 +16,4 @@
             %div{rel: "tooltip",
                  title: map.visible_rating_text,
                  data: {:placement => "bottom", :container => "body"}}
-                = render partial: "maps/stars", locals: {size: 16, score: map.visible_rating(current_user_safe)}
+                = render partial: "maps/stars", locals: {size: 15, score: map.visible_rating(current_user_safe)}

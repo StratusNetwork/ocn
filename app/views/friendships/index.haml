@@ -3,107 +3,22 @@
 %section
     .page-header
         %h2 Friendships
-    - if user_signed_in? && current_user.beta_participant?
-        .row
-            .col-md-12
-                %ul.nav.nav-tabs#tabs
-                    %li.active{:class => @online_friends}
-                        %a.strong{:href => '#all', :data => {:toggle => 'pill'}}
-                            %i.fa.fa-users
-                            All Friends
-                    %li.pull-right{:class => @denied}
-                        %a.strong{:href => '#denied', :data => {:toggle => 'pill'}}
-                            %i.fa.fa-user-times
-                            Denied Requests
-                    %li.pull-right{:class => @pending}
-                        %a.strong{:href => '#pending', :data => {:toggle => 'pill'}}
-                            %i.fa.fa-user-plus
-                            Pending Requests
-        .row
-            .col-md-12
-                .tab-content
-                    .tab-pane.fade.in.active#all
-                        %h4.strong Online Friends
-                        %ul.thumbnails.list-unstyled.clearfix
-                            - @online_friends.each do |obj|
-                                %li.friendship.col-md-2.col-sm-3.col-xs-6{:rel => "tooltip", :title => obj[:friend].username}
-                                    .friend-icon
-                                        %a.label.label-info= "#{obj[:server].name} (#{obj[:datacenter]})"
-                                        %a.remove-friend{:href => friendship_path(obj[:friend]), :data => {:method => :delete, :confirm => "Are you sure you want to unfriend " + obj[:friend].username + "?"}}
-                                            %i.fa.fa-times-circle
-                                        %a.thumbnail{:href => user_path(obj[:friend])}
-                                            = avatar_for(obj[:friend], 128)
-                        %h4.strong Offline Friends
-                        %ul.thumbnails.list-unstyled.clearfix
-                            - @offline_friends.each do |friend|
-                                %li.friendship.col-md-1.col-sm-2.col-xs-3{:rel => "tooltip", :title => friend.username}
-                                    .friend-icon
-                                        %a.remove-friend{:href => friendship_path(friend), :data => {:method => :delete, :confirm => "Are you sure you want to unfriend " + friend.username + "?"}}
-                                            %i.fa.fa-times-circle
-                                        %a.thumbnail{:href => user_path(friend)}
-                                            = avatar_for(friend, 48)
-                    .tab-pane.fade#denied
-                        .table-container
-                            %table.table.table-bordered.table-striped
-                                %thead
-                                    %tr
-                                        %th{:width => "40%"} Friend
-                                        %th{:width => "30%"} Action
-                                        %th{:width => "30%"} Denied At
-                                %tbody
-                                    - if @denials == nil || @denials.count == 0
-                                        %p.strong.center You have no denied requests!
-                                    - else
-                                        - @denials.each_with_index do |friend, i|
-                                            %tr
-                                                %td
-                                                    = avatar_for(friend.friender, 16, glow: true)
-                                                    %a{:href => user_path(friend.friender), :style => 'color: ' + html_color(friend.friender)}= friend.friender
-                                                    to you
-                                                %td
-                                                    %a.btn.btn-warning.btn-xs{:href => friendship_path(friend, :decision => true), :data => {:method => :put}} Accept
-                                                %td{:rel => 'tooltip', :title => format_time(friend.decision_date), :data => {:placement => 'left', :container => 'body'}}
-                                                    = time_ago_in_words(friend.decision_date, false, :vague => true) + " ago"
-                                = paginate @denials unless @denials == nil
-                    .tab-pane.fade#pending
-                        .table-container
-                            %table.table.table-bordered.table-striped
-                                %thead
-                                    %tr
-                                        %th{:width => "40%"} Who
-                                        %th{:width => "30%"} Action
-                                        %th{:width => "30%"} Sent At
-                                %tbody
-                                    - if @requests == nil || @requests.count == 0
-                                        %p.strong.center You have no pending requests!
-                                    - else
-                                        - @requests.each_with_index do |request, i|
-                                            %tr
-                                                - outgoing = is_same_user?(request.friender)
-                                                %td
-                                                    #{outgoing ? 'You to ' : nil}
-                                                    = avatar_for(outgoing ? request.friended : request.friender, 16, glow: true)
-                                                    %a{:href => user_path(outgoing ? request.friended : request.friender), :style => 'color: ' + html_color(outgoing ? request.friended : request.friender)}= outgoing ? request.friended : request.friender
-                                                    #{outgoing ? nil : ' to you'}
-                                                %td
-                                                    - if !outgoing
-                                                        .text-nowrap
-                                                            %a.btn.btn-primary.btn-xs{:href => friendship_path(request, :decision => true), :data => {:method => :put, :'disable-with' => "Accepting..."}} Accept
-                                                            %a.btn.btn-warning.btn-xs{:href => friendship_path(request, :decision => false), :data => {:method => :put, :'disable-with' => "Denying..."}} Deny
-                                                    - else
-                                                        %a.btn.btn-warning.btn-xs{:href => friendship_path(request), :data => {:method => :delete, :'disable-with' => 'Cancelling...'}} Cancel
-                                                %td{:rel => 'tooltip', :title => format_time(request.sent_date), :data => {:placement => 'left', :container => 'body'}}= time_ago_in_words(request.sent_date, false, :vague => true) + " ago"
-                                = paginate @requests unless @requests == nil
-    - else
-        .row
-            .col-md-12
-                %ul.nav.nav-tabs
-                    %li{:class => @online_friends ? "active" : ""}
-                        %a{:href => friendships_path} All Friends
-                    %li.pull-right{:class => @denied ? "active" : ""}
-                        %a{:href => denied_friendships_path} Denied Requests
-                    %li.pull-right{:class => @pending ? "active" : ""}
-                        %a{:href => pending_friendships_path} Pending Requests
+    .row
+        .col-md-12
+            %ul.nav.nav-tabs
+                %li{:class => @online_friends ? "active" : ""}
+                    %a.strong{:href => friendships_path}
+                        %i.fa.fa-users
+                        All Friends
+                %li.pull-right{:class => @denied ? "active" : ""}
+                    %a.strong{:href => denied_friendships_path}
+                        %i.fa.fa-user-times
+                        Denied Requests
+                %li.pull-right{:class => @pending ? "active" : ""}
+                    %a.strong{:href => pending_friendships_path}
+                        %i.fa.fa-user-plus
+                        Pending Requests
+    %section
         .row
             .col-md-12
                 %h4.strong Online Friends

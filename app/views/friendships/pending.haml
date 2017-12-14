@@ -7,11 +7,17 @@
         .col-md-12
             %ul.nav.nav-tabs
                 %li{:class => @all ? "active" : ""}
-                    %a{:href => friendships_path} All Friends
+                    %a.strong{:href => friendships_path}
+                        %i.fa.fa-users
+                        All Friends
                 %li.pull-right{:class => @denied ? "active" : ""}
-                    %a{:href => denied_friendships_path} Denied Requests
+                    %a.strong{:href => denied_friendships_path}
+                        %i.fa.fa-user-times
+                        Denied Requests
                 %li.pull-right{:class => @requests ? "active" : ""}
-                    %a{:href => pending_friendships_path} Pending Requests
+                    %a.strong{:href => pending_friendships_path}
+                        %i.fa.fa-user-plus
+                        Pending Requests
             .tab-content
                 .tab-pane#requests{:class => @requests ? "active" : ""}
                     .table-container
@@ -23,7 +29,7 @@
                                     %th{:width => "30%"} Sent At
                             %tbody
                                 - if @requests == nil || @requests.count == 0
-                                    %p You have no pending requests!
+                                    %p.strong.center You have no pending requests!
                                 - else
                                     - @requests.each_with_index do |request, i|
                                         %tr
