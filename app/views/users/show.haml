@@ -236,13 +236,12 @@
                                         Nothing here yet.
                     .tab-pane#trophycase
                         .row
-                            .col-md-12
-                                - if @trophy_count > 0
-                                    = render :partial => "trophies", :locals => {:trophies => @player.trophies.reverse}
-                                - else
-                                    .col-md-12
-                                        %center
-                                            %p.strong No trophies to display.
+                            - if @trophy_count > 0
+                                = render :partial => "trophies", :locals => {:trophies => @player.trophies.reverse}
+                            - else
+                                .col-md-12
+                                    %center
+                                        %p.strong No trophies to display.
                     .tab-pane#pvp-encounters
                         .row
                             - if !@encounters.empty?
