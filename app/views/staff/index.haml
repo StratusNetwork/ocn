@@ -31,5 +31,5 @@
                                     %a.staff-contact{:href => "mailto:#{member.public_email}"}
                                         %i.fa.fa-envelope
                                 - if member.discord
-                                    %a.staff-contact{:style => "cursor: pointer", :tabindex => "0", :"data-toggle" => "popover", :"data-placement" => "bottom", :"data-trigger" => "focus", :"data-content" => member.discord}
+                                    %a.staff-contact{:style => "cursor: pointer", :tabindex => "0", :"data-toggle" => "popover", :"data-placement" => "bottom", :"data-content" => member.discord}
                                         %i.fab.fa-discord
