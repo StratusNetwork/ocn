@@ -155,56 +155,69 @@
                 .tab-content{:style => "overflow: visible;"}
                     .tab-pane.active#about
                         .row
+                            .col-md-3.col-sm-6
+                                %h4.strong{:rel => "tooltip", :title => "First joined on " + vague_format_time(@initial_join), :data => {:placement => "top"}}
+                                    = @days_here
+                                    %small.strong days since first seen
+                            .col-md-3.col-sm-6
+                                %h4.strong
+                                    = @hours_played
+                                    %small.strong hours played
+                            .col-md-3.col-sm-6
+                                %h4.strong
+                                    = @teams_joined
+                                    %small.strong teams joined
+                        .row
                             - if !@player.public_email.to_s.empty?
-                                .col-md-4.col-sm-6
+                                .col-md-3.col-sm-6
                                     %h5.strong Email
                                     %blockquote
                                         %p
                                             %a{:href => "mailto:#{@player.public_email}"}= @player.public_email
                             - if !@player.twitter.to_s.empty?
-                                .col-md-4.col-sm-6
+                                .col-md-3.col-sm-6
                                     %h5.strong Twitter
                                     %blockquote
                                         %p
                                             %a{:href => "http://twitter.com/#{@player.twitter}", :target => "_blank"}= @player.twitter
                             - if !@player.steam.to_s.empty?
-                                .col-md-4.col-sm-6
+                                .col-md-3.col-sm-6
                                     %h5.strong Steam
                                     %blockquote
                                         %p
                                             %a{:href => "http://steamcommunity.com/id/#{@player.steam}", :target => "_blank"}= @player.steam
                             -#- if @player.channels_for(:youtube).exists?
-                                .col-md-4.col-sm-6
+                                .col-md-3.col-sm-6
                                     %h5.strong YouTube
                                     %blockquote
                                         %p
                                             %a= link_to_youtube_channel(@player)
                             - if !@player.twitch.to_s.empty?
-                                .col-md-4.col-sm-6
+                                .col-md-3.col-sm-6
                                     %h5.strong Twitch
                                     %blockquote
                                         %p
                                             %a{:href => "http://twitch.tv/#{@player.twitch}", :target => "_blank"}= @player.twitch
                             - if !@player.github.to_s.empty?
-                                .col-md-4.col-sm-6
+                                .col-md-3.col-sm-6
                                     %h5.strong Github
                                     %blockquote
                                         %p
                                             %a{:href => "https://github.com/#{@player.github}", :target => "_blank"}= @player.github
                             - if !@player.reddit.to_s.empty?
-                                .col-md-4.col-sm-6
+                                .col-md-3.col-sm-6
                                     %h5.strong Reddit
                                     %blockquote
                                         %p
                                             %a{:href => "http://reddit.com/user/#{@player.reddit}", :target => "_blank"}= @player.reddit
                             - if !@player.discord.to_s.empty?
-                                .col-md-4.col-sm-6
+                                .col-md-3.col-sm-6
                                     %h5.strong Discord
                                     %blockquote
                                         %p{:style => "color: #666"}
                                             = @player.discord
                             - if team = @player.team
-                                .col-md-4.col-sm-6
+                                .col-md-3.col-sm-6
                                     %h5.strong Team
                                     %blockquote
                                         %p
