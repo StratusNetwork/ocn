@@ -7,7 +7,8 @@
     .container
         %h2.front-title= ORG::NAME
         %h4.front-title Large varieties of Minecraft PvP<br>anytime, anywhere
-        %a.btn.btn-primary.btn-lg{:href => play_path} Play Now &raquo;
+        %a.btn.btn-primary.btn-lg.ip
+            %input.input{type: "text", value: "play.stratus.network", onClick: "this.select();", readonly: true}
 .bs-docs-social
     .container
         %ul.bs-docs-social-buttons

@@ -24,6 +24,7 @@
  *= require application/footer
  *= require application/searchbox
  *= require application/staff
+ *= require application/index
 */
 
 body {
