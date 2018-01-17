@@ -71,6 +71,8 @@ Clone it somewhere, and create a symlink to it from `/minecraft/repo/data`.
 From the Web repo, run `rails c` to start a Rails shell session.
 From the Rails shell, run `Repository[:data].load_models` to import everything from the Data repo into MongoDB.
 
+Still from the Rails shell, run `Map.sync_ratings` to do some setup required by the couch worker.
+
 ## Run the backend app
 
 Run the following shell commands from the Web repo to start all the backend services:
