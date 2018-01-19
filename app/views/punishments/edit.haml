@@ -94,7 +94,8 @@
             %hr
             %p You should only edit punishments that you have had a part in. Double check all information before saving.
             %hr
-            - if @can_delete
-                %a.btn.btn-danger{:href => punishment_path(@punishment), :data => {:confirm => 'Are you sure you want to delete this punishment?', :method => :delete}} Delete
-            - else
-                %p You do not have permission to delete this punishment. If you need it removed, please contact a staff member with the appropriate permissions.
+            -#
+              - if @can_delete
+                  %a.btn.btn-danger{:href => punishment_path(@punishment), :data => {:confirm => 'Are you sure you want to delete this punishment?', :method => :delete}} Delete
+              - else
+                  %p You do not have permission to delete this punishment. If you need it removed, please contact a staff member with the appropriate permissions.
