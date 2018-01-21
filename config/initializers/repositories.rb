@@ -24,7 +24,7 @@ Repository.define do
 
             repository :web do
                 title           "Website"
-                description     "Our main website repository and backend"
+                description     "Our main website and backend repository"
                 repo            "OCN"
                 open?           true
             end
