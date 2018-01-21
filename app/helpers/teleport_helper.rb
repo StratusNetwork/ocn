@@ -30,7 +30,7 @@ module TeleportHelper
         end
 
         html = <<-HTML
-            <a href="#{teleport_path(thing)}" class="tp-button" rel="tooltip" title="#{tip}"><i class="fa fa-play"></i></a>
+            <a href="#{teleport_path(thing)}" class="tp-button" rel="tooltip" title="#{tip}"><span class="label label-primary">Teleport</span></a>
         HTML
         html.html_safe
     end

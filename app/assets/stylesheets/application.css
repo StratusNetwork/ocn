@@ -578,24 +578,9 @@ a.tournament-banner:hover img {
 }
 
 .tp-button {
-    display: inline-block;
-    border-radius: 10px;
-    width: 20px;
-    height: 20px;
-    background-color: #0088cc;
-    font-size: 11px;
-    font-weight: normal;
-    line-height: 20px;
+    font-size: 14px;
     position: relative;
     top: -2px;
-}
-
-.tp-button .fa {
-    color: white;
-    font-size: 11px;
-    font-weight: normal;
-    line-height: 20px;
-    margin-left: 7px;
 }
 
 .transaction-payed {

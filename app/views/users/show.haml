@@ -35,7 +35,7 @@
                 - @player.badge_memberships.each do |mem|
                     = render_badge(@player, mem.group, tooltip: mem.staff_role.presence || mem.stop < Time::INF_FUTURE && "Expires in #{format_package_expire(mem.stop)}")
     .row{style: "margin-top: 20px"}
-        .col-md-2.col-sm-3.col-xs-6
+        .col-md-2.col-sm-3.col-xs-6.center
             %a{:href => "#", :style => "width: 130px; height: 130px;"}
                 = avatar_for(@player, 130, glow: true)
             - if @last_sighting
@@ -46,6 +46,7 @@
                             - if @show_server && @last_sighting.server
                                 - if current_user_safe.can_teleport_to?(@player)
                                     = teleport_button(@player)
+                                    %br
                                 %a{:href => main_app.play_path}
                                     = @last_sighting.server.name
                                     .datacenter
