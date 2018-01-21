@@ -35,7 +35,7 @@
             .col-md-4
                 .panel.panel-default
                     .panel-heading
-                        %h4 Issue a punishment
+                        %h4.strong.center Issue a punishment
                     .panel-body
                         %input.form-control#extra-data{:type => 'text', :name => 'reason', :placeholder => 'Reason...', :required => ''}
                         %br
@@ -44,8 +44,9 @@
                             Evidence entered here will be visible to
                             = @report.reported
                             \. Check it carefully before issuing the infraction.
+                        %hr
                         - unless (@issueable_types & Punishment::Type::GAME).empty?
-                            %h6.text-uppercase
+                            %h6.strong.text-uppercase
                                 %i.fa.fa-play
                                 In-game
                             .btn-group{:style => 'margin-top: 4px;'}
@@ -56,7 +57,7 @@
                                 - if @issueable_types.include?(Punishment::Type::BAN)
                                     %a.action.btn.btn-warning{:href => '#action', :data => {:toggle => 'modal', :type => 'punish', :subtype => 'game'}} Perma
                         - unless (@issueable_types & Punishment::Type::FORUM).empty?
-                            %h6.text-uppercase
+                            %h6.strong.text-uppercase
                                 %i.fa.fa-comments
                                 Forum
                             .btn-group{:style => 'margin-top: 4px;'}
@@ -67,7 +68,7 @@
                                     %a.action.btn.btn-primary{:href => '#action', :data => {:toggle => 'modal', :type => 'punish', :subtype => 'forum'}} 30 Day
                                     %a.action.btn.btn-primary{:href => '#action', :data => {:toggle => 'modal', :type => 'punish', :subtype => 'forum'}} Perma
                         - unless (@issueable_types & Punishment::Type::TOURNEY).empty?
-                            %h6.text-uppercase
+                            %h6.strong.text-uppercase
                                 %i.fa.fa-trophy
                                 Tourney
                             .btn-group{:style => 'margin-top: 4px;'}
@@ -103,7 +104,7 @@
                 = render :partial => 'common/punishments', :locals => {:punishments => @punishments, :displayed_statuses => @displayed_statuses}
             - else
                 %center
-                    %p No punishments to display.
+                    %p.strong No punishments to display.
     - if @web_reports
         .page-header
             %h2
@@ -116,7 +117,7 @@
                     = render :partial => "reports/web/list", :locals => {:reports => @web_reports}
                 - else
                     %center
-                        %p No reports to display.
+                        %p.strong No reports to display.
     - if @game_reports
         .page-header
             %h2
@@ -129,7 +130,7 @@
                     = render :partial => "reports/game/list", :locals => {:reports => @game_reports}
                 - else
                     %center
-                        %p No reports to display.
+                        %p.strong No reports to display.
     .page-header.clearfix
         %h2 History
         .pull-right.btn-group
