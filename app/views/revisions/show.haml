@@ -20,7 +20,8 @@
                     You can
                     %a{:href => @repository.public_url} fork it
 
-            != @repository.description_html
+            .strong
+                != @repository.description_html
 
             .table-container
                 %table.table.table-bordered

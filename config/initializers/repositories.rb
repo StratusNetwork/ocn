@@ -8,7 +8,7 @@ Repository.define do
         end
 
         visible? true do
-            repository :plugins do
+            repository :projectares do
                 title           "ProjectAres"
                 description     "Our custom Bukkit plugins (such as PGM) that control matches and add network features to Minecraft"
                 repo            "ProjectAres"
@@ -22,16 +22,31 @@ Repository.define do
                 open?           true
             end
 
-            repository :docs do
+            repository :web do
                 title           "Website"
-                description     "Our website repository"
+                description     "Our main website repository and backend"
                 repo            "OCN"
+                open?           true
+            end
+
+            repository :static do
+                title           "Data"
+                description     "Our static configuration data files for the backend"
+                repo            "Data"
+                open?           true
+            end
+
+            repository :docs do
+                title           "XML Documentation"
+                description     "Our XML documentation website for defining map specific features"
+                repo            "XML-Documentation"
+                branch          "gh-pages"
                 open?           true
             end
 
             repository :rotations do
                 title           "Rotations"
-                description     "Our map rotations on our servers"
+                description     "Our server rotation files"
                 repo            "Rotations"
                 open?           true
             end
