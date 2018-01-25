@@ -5,14 +5,16 @@
                 %table.table
                     %thead
                         %tr
-                            %th{:width => "5%"} Priority
-                            %th Name
-                            %th Description
-                            %th
+                            %th{:width => "10%"} Priority
+                            %th{:width => "35%"} Name
+                            %th{:width => "53%"} Description
+                            %th{:width => "2%"}
                     %tbody
                         - @groups.each do |group|
                             %tr.group-row
                                 %td.group-priority= group.priority
                                 %td.group-name{:style => "color: " + group.html_color_css}= group.name
                                 %td.group-description= group.description
-                                %td= link_to "Edit", admin_group_members_path(group)
+                                %td.center
+                                    %a{:href => admin_group_members_path(group)}
+                                        %i.fa.fa-pencil-alt
