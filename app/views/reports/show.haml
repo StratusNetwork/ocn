@@ -12,9 +12,11 @@
                     Open
                 - else
                     Escalated
-            %a.btn.btn-default.pull-right{:href => reports_path}
-                %i.fa.fa-tasks
-                All Reports
+            .btn-group.pull-right
+                %a.btn.btn-default{:href => reports_path}
+                    %i.fa.fa-tasks
+                    All Reports
+                %a.btn.btn-primary{:href => "javascript:history.go(-1)"} Back
     .row
         .col-md-8
             .row

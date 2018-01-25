@@ -19,6 +19,11 @@
                     = link_to "Validate", validate_match_path(valid: true), method: 'post', class: 'btn btn-warning pull-right'
                 - if @some_valid
                     = link_to "Invalidate", validate_match_path(valid: false), method: 'post', class: 'btn btn-warning pull-right'
+            .btn-group.pull-right
+                %a.btn.btn-default{:href => matches_path}
+                    %i.fa.fa-tasks
+                    All Matches
+                %a.btn.btn-primary{:href => "javascript:history.go(-1)"} Back
     .row
         .col-md-4
             - if @match.map

@@ -8,7 +8,11 @@
             %small{:rel => "tooltip", :title => format_time(@punishment.date), :data => {:placement => "bottom", :container => "body"}}
                 = time_ago_in_words(@punishment.date, false, :vague => true)
                 ago
-            %a.btn.btn-default.pull-right{:href => punishments_path} Back
+            .btn-group.pull-right
+                %a.btn.btn-default{:href => punishments_path}
+                    %i.fa.fa-tasks
+                    All Punishments
+                %a.btn.btn-primary{:href => "javascript:history.go(-1)"} Back
     .row
         %div{:class => @can[:punishment][:appeal] || @can[:punishment][:view_appeal] ? "col-sm-8" : "col-sm-12"}
             .panel.punishment-box{:class => @punishment.active ? @punishment.warn? ? "panel-warning" : "panel-danger" : "panel-success"}
