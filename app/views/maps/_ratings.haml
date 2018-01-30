@@ -1,7 +1,7 @@
 - if ratings
     .col-md-4.rating
         - if ratings.confident?
-            = render partial: 'stars', locals: {size: 46, score: ratings.mean}
+            = render partial: 'stars', locals: {size: 32, score: ratings.mean}
             %h1.strong
                 = sprintf('%.2f', ratings.mean)
                 %small Average Rating
