@@ -35,27 +35,16 @@ class RegistrationsController < Devise::RegistrationsController
         return redirect_to_back edit_user_registration_path, :alert => 'Nothing to update.' if params[:user].nil?
         return redirect_to_back edit_user_registration_path, :alert => "An unknown error has occurred. If the problem persists, please email #{ORG::EMAIL}" unless @user = User.find(current_user.id)
 
-        banned_updates = @user.banned_updates
-
-        unless @user.can_set_default_server?
-            banned_updates << 'default_server_id'
-        end
-
-        unless @user.can_set_death_screen?
-            banned_updates << 'death_screen'
-        end
-
-        unless @user.can_set_beta_participant?
-            banned_updates << 'beta_participant'
-        end
-
         # FIXME
         # unless User.valid_death_screen?(form[:death_screen])
         #     form[:death_screen] = 'default'
         # end
 
         form = params[:user]
-        form.delete_if{|key, value| banned_updates.include? key.to_sym}
+
+        if !@user.premium? && (form[:default_server_id].present? || form[:death_screen].present? || form[:beta_participant].present?)
+            return redirect_to_back edit_user_registration_path, :alert => 'You have to be premium to update that setting!'
+        end
 
         return redirect_to_back edit_user_registration_path, :alert => 'Invalid gender specified' unless ['Male', 'Female', 'Other', '', nil].include? form[:gender]
         return redirect_to_back edit_user_registration_path, :alert => 'Invalid theme specified' unless ['Default', 'Dark Theme', '', nil].include? form[:web_theme]
