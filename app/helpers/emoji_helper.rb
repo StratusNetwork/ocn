@@ -42,6 +42,6 @@ module EmojiHelper
     end
 
     def emoji_img(emoji, emoji_size)
-        %(<img alt="#{emoji.name}" src="#{image_path("emoji/#{emoji.image_filename}")}" style="vertical-align:middle;" width="#{emoji_size}" height="#{emoji_size}"/>)
+        %(<img alt="#{emoji.name}" src="#{image_path("https://assets-cdn.github.com/images/icons/emoji/#{emoji.image_filename}")}" style="vertical-align:middle;" width="#{emoji_size}" height="#{emoji_size}"/>)
     end
 end

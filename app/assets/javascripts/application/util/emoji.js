@@ -9,7 +9,7 @@ $(document).ready(function () {
             },
             template: function (value) {
                 var emoji = emojis_map[value];
-                return '<img alt="' + emoji + '" src="https://' + emoji + '" width="20px" height="20px"/>' + value;
+                return '<img alt="' + emoji + '" src="https://assets-cdn.github.com/images/icons/emoji' + emoji + '" width="20px" height="20px"/>' + value;
             },
             replace: function (value) {
                 return ':' + value + ': ';
