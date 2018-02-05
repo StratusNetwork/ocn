@@ -20,7 +20,7 @@
             Sync DNS
     .row
         .col-md-12
-            %h2 Families
+            %h2.strong Families
             .table-container
                 %table.table.table-striped.table-condensed
                     %thead
@@ -46,9 +46,9 @@
         - bungee = family[:id] == 'bungee'
 
         %a{name: family[:id]}
-        %h2
+        %h2.strong
             = family[:name]
-            %small= family[:id]
+            %small.strong= family[:id]
         .row
             .col-md-12
                 .table-container
@@ -118,7 +118,7 @@
                                             %i.fa.fa-times
     .row
         .col-md-12
-            %h2 Totals
+            %h2.strong Totals
             .table-container
                 %table.table.table-striped.table-condensed
                     %thead
@@ -148,7 +148,7 @@
         - unless boxes.empty?
             .row
                 .col-md-12
-                    %h2
+                    %h2.strong
                         = datacenter
                         Matrix
                     .table-container
