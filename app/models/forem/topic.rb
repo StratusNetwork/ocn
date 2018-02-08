@@ -169,7 +169,7 @@ module Forem
 
             def whats_new
                 self.in(forum: Forum.ne(home_viewable: false).to_a)
-                    .visibly_updated_since(1.week.ago)
+                    .visibly_updated_since(1.month.ago)
                     .by_visibly_updated
             end
         end
