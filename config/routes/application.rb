@@ -24,6 +24,8 @@ PGM::Application.routes.draw do
     get '/load_models', :to => 'application#load_models'
 
     get '/apply' => redirect('https://stratus.network/forums/59ac44fba2e3a9000100004c')
+    get '/avatars' => redirect('https://stratus.network/forums/posts/5a2ec1be9855c0000100007e')
+    get '/emoji' => redirect('https://stratus.network/forums/posts/5a7f78de7b10af00010002f9')
 
     resources :revisions
     resources :rules
