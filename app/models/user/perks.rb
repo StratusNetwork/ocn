@@ -38,10 +38,10 @@ class User
                 'triple' => 'Oh baby a triple!',
                 'next' => 'Next time!',
                 'luigi' => 'Itza Me!',
-                'crazy' => 'That\'s Crazy_'
-                'hec' => 'What the hec!'
-                'piston' => 'You’re piston me off!'
-                'mamamia' => 'Mama Mia!'
+                'crazy' => 'That\'s Crazy_',
+                'hec' => 'What the hec!',
+                'piston' => 'You’re piston me off!',
+                'mamamia' => 'Mama Mia!',
                 'everyone' => '@everyone'
             }
             end
