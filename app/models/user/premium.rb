@@ -5,7 +5,7 @@ class User
         include Login
 
         TRIAL_LENGTH = 7.days
-        TRIAL_CUTOFF = Time.utc(2017, 8, 21) # Only users who joined after this date are eligible
+        TRIAL_CUTOFF = Time.utc(2018, 3, 1) # Only users who joined after this date are eligible
         TRIAL_GROUP_NAME = '_trial'
 
         class << self

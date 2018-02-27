@@ -19,6 +19,8 @@
             = stylesheet_link_tag "dark-theme"
         - if user_signed_in? && current_user.dyslexia_assist?
             = stylesheet_link_tag "dyslexia-assist"
+        - if user_signed_in? && current_user.beta_participant?
+            = stylesheet_link_tag "beta"
         = javascript_include_tag "libraries", "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js", "application"
         = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.0/bootstrap3-typeahead.min.js"
         = favicon_link_tag "favicon.ico"

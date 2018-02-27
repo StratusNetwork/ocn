@@ -177,10 +177,11 @@
                 .tab-pane.fade#premium_settings
                     %h3.strong Premium Settings
                     %hr
-                    %p
-                        Purchase a premium rank from our
-                        %a{:href => main_app.shop_path} shop page
-                        to have access to Premium Features.
+                    - if !@user.premium?
+                        %p
+                            Purchase a premium rank from our
+                            %a{:href => main_app.shop_path} shop page
+                            to have access to Premium Features.
                     .row
                         = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
                             .col-md-6

@@ -1,4 +1,10 @@
 - content_for :title do @player.username end
+
+- if @cake_day
+    = stylesheet_link_tag "application/cakeday"
+    = javascript_include_tag "application/confetti"
+    #confetti
+
 %section
     - if @player.suspended?
         - content_for :noindex, true
@@ -11,7 +17,7 @@
         .row
             .col-md-12
                 .alert.alert-info
-                    %i.fa.fa-gift
+                    %i.fa.fa-birthday-cake
                     %strong Happy Cake Day!
                     - same_user = is_same_user?(@player)
                     #{same_user ? "You" : @player.username} joined us #{@cake_years} year#{@cake_years > 1 ? "s" : nil} ago, today. #{same_user ? "Thanks for hanging out!" : "Wish #{gender_pronoun_for(@player)[:singular]} a happy Cake Day!"}
@@ -20,6 +26,8 @@
             = render partial: "friendships/widget", locals: {user: @player}
             %h2.strong{style: "margin-top: 0"}
                 %span{:style => "color: " + html_color(@player)}
+                    - if @cake_day
+                        %i.fa.fa-birthday-cake
                     = @player.username
                 - if @previous_username
                     %small (formerly #{@previous_username})

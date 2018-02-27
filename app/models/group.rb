@@ -18,6 +18,7 @@ class Group
     field :name, type: String, validates: {presence: true}
     field :priority, type: Integer, default: 0, validates: {presence: true}
     field :staff, type: Boolean, default: false
+    field :premium, type: Boolean, default: false
     field :description, type: String
 
     field :html_color, type: String
@@ -51,7 +52,7 @@ class Group
     properties = [:name, :priority,
                   :html_color,
                   :badge_type, :badge_color, :badge_text_color, :badge_link,
-                  :minecraft_permissions, :web_permissions, :staff,
+                  :minecraft_permissions, :web_permissions, :staff, :premium,
                   :minecraft_flair]
 
     attr_accessible *properties
@@ -215,6 +216,6 @@ class Group
     end
 
     def premium?
-        staff || !Package.for_group(self).nil?
+        self.premium || !Package.for_group(self).nil?
     end
 end
