@@ -27,6 +27,7 @@ PGM::Application.routes.draw do
     get '/avatars' => redirect('https://stratus.network/forums/posts/5a2ec1be9855c0000100007e')
     get '/emoji' => redirect('https://stratus.network/forums/posts/5a7f78de7b10af00010002f9')
     get '/mapmaking' => redirect('https://stratus.network/forums/58e16d72f6e8a83410000047')
+    get '/conduct' => redirect('https://stratus.network/forums/topics/59b70619a2e3a9000100010f')
 
     resources :revisions
     resources :rules
