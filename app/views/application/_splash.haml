@@ -1,13 +1,16 @@
 .carousel.slide#hero{:style => "position: absolute;"}
     .carousel-inner{:style => "z-index: -1"}
         .item{:class => "active"}
-            %img{:src => image_path(@image), :id => "breathing"}
-
+            %img#breathing{:src => image_path(@image)}
 .jumbotron.main.masthead
     .container
         %h2.front-title= ORG::NAME
         %h4.front-title Large varieties of Minecraft PvP<br>anytime, anywhere
-        %a.btn.btn-primary.btn-lg{:href => play_path} Play Now &raquo;
+        .row
+            .col-md-6.ip
+                %p.label.label-default SERVER IP
+                %a.btn.btn-primary.btn-lg.ip
+                    %input.input{type: "text", value: "play.stratus.network", onClick: "this.select();", readonly: true}
 .bs-docs-social
     .container
         %ul.bs-docs-social-buttons
@@ -22,9 +25,22 @@
 %section
     .container{:style => "padding-bottom: 40px"}
         %br
-        .row
-            .col-md-8{:style => "padding-top: 20px"}
-                %h4{:style => "font-weight: bold"} About Us
-                %p Founded in early 2017, the Stratus Network aims to become the next home for the PGM plugin. With it and other custom-coded plugins, Stratus offers both competitive and casual team-based PvP and, most importantly, a dedicated and awesome community.
+        .row.stat-display
             .col-md-4
-                %img.center-block{:src => asset_path("logo_cloud.png"), :width => "50%"}
+                %img.center-block{:src => asset_path("index/variety.png")}
+                %h2 COMMUNITY
+                %hr
+                %h3 000.000
+                %h5 TOTAL PLAYER JOINS
+            .col-md-4
+                %img.center-block{:src => asset_path("index/competition.png")}
+                %h2 GAMES
+                %hr
+                %h3 000.000
+                %h5 MATCHES PLAYED
+            .col-md-4
+                %img.center-block{:src => asset_path("index/reliability.png")}
+                %h2 SUPPORT
+                %hr
+                %h3 1.7 - 1.12
+                %h5 VERSIONS SUPPORTED

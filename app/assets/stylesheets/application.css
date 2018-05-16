@@ -24,6 +24,7 @@
  *= require application/footer
  *= require application/searchbox
  *= require application/staff
+ *= require application/index
 */
 
 body {
@@ -389,7 +390,7 @@ ul.dropdown-menu {
 }
 
 .masthead.main .btn {
-    padding: 20px 24px;
+    padding: 10px 12px;
     font-size: 28px;
     font-weight: 400;
     color: #fff;
@@ -451,6 +452,7 @@ ul.dropdown-menu {
     padding: 0 10px;
     color: rgba(255,255,255,.25);
 }
+
 
 .bs-docs-social {
     padding: 15px 0;
