@@ -20,7 +20,7 @@
                     .col-md-3.col-sm-6
                         .staff-entry
                             %a{:href => user_path(member.username)}
-                                = avatar_for(member.username, 90)
+                                = avatar_for(member.username, 90, glow: true)
                                 %div.staff-username.strong{:style => "color: #{group.badge_color}; border-bottom-color: #{group.badge_color};" }= member.username
                                 %div.staff-role= member.membership_in(group).staff_role.presence || group.name.singularize
                             %div.staff-social
